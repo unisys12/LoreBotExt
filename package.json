@@ -1,0 +1,22 @@
+{
+  "name": "lorebotext",
+  "version": "0.0.1",
+  "description": "Deliver in-game lore to players of Destiny through a chrome extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test --recursive",
+    "dev": "mocha test --recursive --watch"
+  },
+  "repository": "https://github.com/unisys12/LoreBotExt.git",
+  "author": "Phillip Jackson <unisys12@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dotenv": "^4.0.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "mongoose": "^4.7.7"
+  }
+}

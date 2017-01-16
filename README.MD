@@ -175,3 +175,18 @@ _This will return a response like so, of the Grimoire Card:_
 ```
 
 _We can then take this as far as we want really._
+
+## Stage 1
+Decide on the most basic of dependences to use within the project.
+### Core Dependencies
+- At this early stage, I know for sure I want to use the ODM Mongoose when connecting
+to the MongoDB that contains the latest Destiny Manifest data.
+
+### Development Dependencies
+This project should be tested to the best of my ability _(which is not alot by the way)_ .
+This project will require extensive testing, which at present, is a weakness of mine. I plan
+to resolve that during this time.
+- Mocha
+- Chai
+- Sinon
+- Still deciding on a coveralls and browser testing options.
