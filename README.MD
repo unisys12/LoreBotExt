@@ -1,8 +1,8 @@
 ### Project Goals
-Create a browser extension that, once enabled, will allow the user to play Destiny and get Grimoire and other Lore delivered to their browser in real time. In short, try to get as close to giving the player "in-game lore" without actually our code actually being in the game.
+Create a browser extension that, once enabled, will allow the user to play Destiny and get Grimoire as well as other game related lore delivered to their browser in real time. In short, try to get as close to giving the player "in-game lore" without our code actually being in the game.
 
 ### Proposed Project Means
-I propose to accomplish this, hopefully with some help from the community _(web dev and game alike)_ using a fairly modern web development structure and deliver it through as a Chrome Extension. This means, delivering all the content by way of not using a server to deliver pages or to generate dynamic content. To do this, the project will have to be built using one of the many Javascript frameworks on the market today. I have yet to decide on one at this time. Later, I would like to make this avaliable to Firefox users as well, but need to get this running on Chrome first I think.
+I propose to accomplish this, hopefully with some help from the community _(web dev and game alike)_ using a fairly modern web development structure and deliver it through as a Chrome Extension. This means, delivering all the content by way of not using a server to deliver pages or to generate dynamic content. To do this, the project will have to be built using one of the many Javascript frameworks on the market today. I have yet to decide on one at this time. Later, I would like to make this available to Firefox users as well, but need to get this running on Chrome first I think.
 
 I will be utilizing most generally excepted methods of code construction (ES6) leveraging Babel here. Testing will be done using Mocha, Chai and Sinon unless a framework is chosen that requires me use something different.
 
@@ -124,7 +124,7 @@ This returns a JSON Response that looks like the following:
   "MessageData": {}
 }
 ```
-This is way too much information to cache, so... we should look for any character that might have any recent activity. We can do this by inspecting `Response.data.characters.characterBase.currentActivityHash`. If this is 0, that means that this active is not active. If it contains a hash, it means that this character either currently in an active or just left an activity. When we find this, we can isolate that character from there.
+This is way too much information to cache, so... we should look for any character that might have recent activity. We can do this by inspecting `Response.data.characters.characterBase.currentActivityHash`. If this is 0, that means that this active is not active. If it contains a hash, it means that this character either currently in an active or just left an activity. When we find this, we can isolate that character from there.
 
 This can be stored in a global object literal. From this, as changes take place, we can update the web page with the characters emblem, light level, grimoire score, as well as the players current activity.
 
