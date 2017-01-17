@@ -86,7 +86,7 @@ This returns a JSON Response that looks like the following:
             "grimoireScore": 4930,
             "peerView": {
               "equipment": [
-                // List of Equipment and Items
+                "// List of Equipment and Items"
               ]
             },
             "genderType": 0,
@@ -94,7 +94,7 @@ This returns a JSON Response that looks like the following:
             "buildStatGroupHash": 1514588224
           },
           "levelProgression": {
-            // Progress Stats
+            "// Progress Stats"
           },
           "emblemPath": "/common/destiny_content/icons/2847680c4b152c9f088211f3b09047e6.jpg",
           "backgroundPath": "/common/destiny_content/icons/43fd049b9af53b06b16e521572c14109.jpg",
@@ -106,11 +106,13 @@ This returns a JSON Response that looks like the following:
         },
         {
           "characterBase": {
-            // 2nd Character Created
+            "// 2nd Character Created"
         },
         {
           "characterBase": {
-            // 3rd Character Created
+            "// 3rd Character Created"
+          }
+        }
         ]
       },
       "grimoireScore": 4930,
@@ -165,16 +167,18 @@ _This returns an object such as the following:_
 }
 ```
 
-From this, we can display a decent amount of info and the current activity, but more importantly, we can leverage the API of Ishtar-Collective and perform a search within Ishtar's Catagories, like so:
+From this, we can display a decent amount of info and the current activity, but more importantly, we can leverage the API of Ishtar-Collective and perform a search within Ishtar, like so:
 
 - `http://api.ishtar-collective.net/cards/the-shadow-thief`
 
-_This will return a response like so, of the Grimoire Card:_
+_This will return a response of the Grimoire Card:_
 ```json
 {"grimoire_card":{"ishtar_ref":"the-shadow-thief","name":"The Shadow Thief","ishtar_url":"http://www.ishtar-collective.net/cards/the-shadow-thief","api_url":"http://api.ishtar-collective.net/cards/the-shadow-thief","bungie_ref":"601160","image_url":"/common/destiny_content/grimoire/hr_images/601160_f2b2609901154773ff742ae15eb0e3e4.jpg","intro":null,"intro_attribution":null,"description":"\u0026quot;The Wolves have sent a mercenary to Luna. Taniks, the Scarred. He would steal from the Hive all they know. Would align the Fallen with the shadows. You will stop him... but he will rejoice in your interference. Embraces conflict does Taniks. Revels in the trophies he collects from all he defeats. End his games.\u0026quot; - Variks, the Loyal","bungie_deleted":false,"categories":[{"ishtar_ref":"variks","name":"Variks","ishtar_url":"http://www.ishtar-collective.net/categories/variks","api_url":"http://api.ishtar-collective.net/categories/variks"}]}}
 ```
 
-_We can then take this as far as we want really._
+From the above response object, we can also see that Ishtar has this strike tied to
+a category as well, so why not display that too...
+- response.categories
 
 ## Stage 1
 Decide on the most basic of dependences to use within the project.
