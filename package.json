@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test --recursive",
-    "dev": "babel-watch -w src mocha test --recursive --watch",
-    "build": "babel src -d dist"
+    "dev": "mocha test --recursive --watch"
   },
   "repository": "https://github.com/unisys12/LoreBotExt.git",
   "author": "Phillip Jackson <unisys12@gmail.com>",
@@ -14,6 +13,7 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
+    "babel-preset-env": "^1.1.8",
     "babel-watch": "^2.0.5",
     "chai": "^3.5.0",
     "dotenv": "^4.0.0",
