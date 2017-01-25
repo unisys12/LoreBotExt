@@ -1,6 +1,6 @@
 {
   "name": "lorebotext",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Deliver in-game lore to players of Destiny through a chrome extension",
   "main": "src/index.js",
   "scripts": {
@@ -23,5 +23,21 @@
   },
   "dependencies": {
     "mongoose": "^4.7.7"
+  },
+    "eslintConfig": {
+    "env": {
+      "node": true,
+      "browser": true
+    },
+    "globals": {
+      "chrome": true
+    },
+    "rules": {
+      "eol-last": 0,
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
   }
 }
