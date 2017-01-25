@@ -7,11 +7,10 @@
     "16": "images/favicon-16.png",
     "128": "images/favicon-128.png"
   },
-  "default_locale": "en",
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://unpkg.com; object-src 'self'",
   "background": {
     "scripts": [
-
+        "background.js"
     ]
   },
   "permissions": [
