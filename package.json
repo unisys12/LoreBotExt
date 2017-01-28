@@ -29,7 +29,7 @@
     "vue": "^2.1.10"
   },
   "browser": {
-      "vue": "./node_modules/vue/dist/vue.common"
+    "vue": "./node_modules/vue/dist/vue.common"
   },
   "eslintConfig": {
     "env": {
