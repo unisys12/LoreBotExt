@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Bring Destiny Grimoire to the browser while you play">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>LoreBot Extension</title>
+        <link rel="icon" type="image/png" href="images/favicon-196.png" sizes="196x196" />
+        <link rel="icon" type="image/png" href="images/favicon-96.png" sizes="96x96" />
+        <link rel="icon" type="image/png" href="images/favicon-32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="images/favicon-16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="images/favicon-128.png" sizes="128x128" />
+        <!-- <script src="https://unpkg.com/vue/dist/vue.js" charset="utf-8"></script> -->
+    </head>
+    <body>
+        <header>
+            <div class="title">
+                <h1>LoreBot Chrome Extension <small>v0.0.2</small></h1>
+            </div>
+            <div id="app">
+                <h3>{{ message }}</h3>
+            </div>
+        </header>
+        <main>
+            <section class="main-header">
+                <div id="inputs">
+                    // Should collapse once valid information is retrieved
+                    <div class="platform-input">
+                        <label for="membershipType">Console Type: </label>
+                        <select name="membershipType" id="membershipType" autofocus="true">
+                            <option value=""></option>
+                            <option value="1">XBOX</option>
+                            <option value="2">PSN</option>
+                        </select>
+                    </div>
+                    <div class="gamertag-input">
+                        <label for="displayName">Gamertag: </label>
+                        <input type="text" name="displayName">
+                    </div>
+                </div>
+                <hr>
+            </section>
+            <section class="character-display">
+                // Character Infomation Displyed Here!
+                /* Should contain an option to view Loadout Lore */
+            </section>
+            <section class="activity-display">
+                // Display Current Activity Title and Base Info
+            </section>
+            <section class="card-display">
+                // Display cards related to current activity
+            </section>
+            <section class="category-display">
+                // Display category details related to current activity
+            </section>
+        </main>
+        <script type="text/javascript" src="index.js"></script>
+    </body>
+</html>
