@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test --recursive",
-    "dev": "mocha test --recursive --watch"
+    "dev": "mocha test --recursive --watch",
+    "dev-build": "browserify src/core.js -t babelify --outfile src/index.js"
   },
   "repository": "https://github.com/unisys12/LoreBotExt.git",
   "author": "Phillip Jackson <unisys12@gmail.com>",
@@ -13,8 +14,11 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
+    "babel-core": "^6.22.1",
     "babel-preset-env": "^1.1.8",
     "babel-watch": "^2.0.5",
+    "babelify": "^7.3.0",
+    "browserify": "^14.0.0",
     "chai": "^3.5.0",
     "dotenv": "^4.0.0",
     "eslint": "^3.13.1",
@@ -24,7 +28,7 @@
   "dependencies": {
     "mongoose": "^4.7.7"
   },
-    "eslintConfig": {
+  "eslintConfig": {
     "env": {
       "node": true,
       "browser": true
