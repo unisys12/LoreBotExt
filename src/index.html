@@ -50,6 +50,10 @@
             <section class="character-display">
                 // Character Infomation Displyed Here!
                 /* Should contain an option to view Loadout Lore */
+                <div v-for="character in characterBase">
+                    <img v-bind:src="'http://www.bungie.net'+character.emblemPath">
+                    <img v-bind:src="'http://www.bungie.net'+character.backgroundPath">
+                </div>
             </section>
             <section class="activity-display">
                 // Display Current Activity Title and Base Info
