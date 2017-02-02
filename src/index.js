@@ -10325,7 +10325,6 @@ var character = new _vue2.default({
 
     // Configure Vue-Resource Options
     http: {
-        root: 'http://www.bungie.net/Platform/Destiny/',
         headers: {
             'X-API-KEY': '7ced29b9f06844efb9102fbf73218362'
         }
@@ -10374,7 +10373,11 @@ var character = new _vue2.default({
                     vm.activeCharacter = vm.characterBase.filter(this.isActive);
 
                     // Just for displaying that we successfully grabed an active character
-                    console.log('Active Character: ' + vm.activeCharacter);
+                    if (vm.activeCharacter != '') {
+                        console.log('Active Character: ' + vm.activeCharacter);
+                    } else {
+                        console.log('It seems the player with the ID of ' + vm.membershipId + ' doesn\'t have any active characters.');
+                    }
 
                     if (vm.activeCharacter == 0) {
                         vm.message = 'None of your characters seem to be in an activity';
