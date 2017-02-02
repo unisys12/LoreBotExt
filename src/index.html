@@ -14,21 +14,21 @@
         <!-- <script src="https://unpkg.com/vue/dist/vue.js" charset="utf-8"></script> -->
     </head>
     <body>
-        <header>
+        <header id="app-header">
             <div class="title">
-                <h1>LoreBot Chrome Extension <small>v0.0.2</small></h1>
+                <h1>LoreBot Chrome Extension <small>{{ getAppVersion }}</small></h1>
             </div>
-            <div id="app">
+            <div>
                 <h3>{{ message }}</h3>
             </div>
         </header>
-        <main>
+        <main id="character">
             <section class="main-header">
                 <div id="inputs">
                     // Should collapse once valid information is retrieved
                     <div class="platform-input">
                         <label for="membershipType">Console Type: </label>
-                        <select name="membershipType" id="membershipType" autofocus="true">
+                        <select name="membershipType" id="membershipType" autofocus="true" v-model="membershipType">
                             <option value=""></option>
                             <option value="1">XBOX</option>
                             <option value="2">PSN</option>
@@ -36,7 +36,10 @@
                     </div>
                     <div class="gamertag-input">
                         <label for="displayName">Gamertag: </label>
-                        <input type="text" name="displayName">
+                        <input type="text" name="displayName" v-model="displayName">
+                    </div>
+                    <div class="assemble-button">
+                        <button v-on:click="{{ assembleCharacters() }}">Get Characters</button>
                     </div>
                 </div>
                 <hr>

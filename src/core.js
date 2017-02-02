@@ -1,3 +1,4 @@
 'use strict'
 
-require('./pages/index.js')
+require('./components/header.js')
+require('./components/character.js')
