@@ -77,7 +77,7 @@ new Vue({
       checkActivity: function() {
         try {
           console.log('Reload Method Fired!')
-          setTimeout(this.assembleCharacters, 5000)
+          setInterval(this.assembleCharacters, 10000)
         } catch (e) {
           console.log('Error from checkActivity' + e)
         }
