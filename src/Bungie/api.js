@@ -17,5 +17,30 @@ function getSummary(membershipType, membershipId) {
     return axios('http://www.bungie.net/Platform/Destiny/' + membershipType + '/Account/' + membershipId + '/Summary/')
 }
 
+function getRace(raceHash) {
+    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    '/Manifest/8' + raceHash)
+}
+
+function getGender(genderHash) {
+    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    '/Manifest/4' + genderHash)
+}
+
+function getClass(classHash) {
+    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    '/Manifest/3' + classHash)
+}
+
+function getActivity(definitionId) {
+    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    '/Manifest/1/' + 
+    definitionId + '/')
+}
+
 module.exports.getIdByDisplayName = getIdByDisplayName
 module.exports.getSummary = getSummary
+module.exports.getRace = getRace
+module.exports.getGender = getGender
+module.exports.getClass = getClass
+module.exports.getActivity = getActivity
