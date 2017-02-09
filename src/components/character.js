@@ -1,7 +1,7 @@
 'use strict'
 
 import Vue from 'vue'
-import { getIdByDisplayName, getSummary } from '../Bungie/api.js'
+import { getIdByDisplayName, getSummary, getActivity } from '../Bungie/api.js'
 let co = require('co')
 
 
@@ -15,7 +15,8 @@ new Vue({
         membershipType: '',
         membershipId: '',
         characterBase: [],
-        activeCharacter: ''
+        activeCharacter: '',
+        activity: ''
     },
 
     methods: {
@@ -56,7 +57,8 @@ new Vue({
 
           // Just for displaying that we successfully grabed an active character
           if (vm.activeCharacter) {
-            console.log('Active Character: ' + vm.activeCharacter)
+            console.log('Active Character: ' + JSON.stringify(vm.activeCharacter))
+            yield this.resolveActivity
           } else {
             console.log('It seems the player with the ID of ' + vm.membershipId + ' doesn\'t have any active characters.')
             vm.message = 'None of your characters seem to be in an activity'
@@ -70,10 +72,6 @@ new Vue({
           
       }),
 
-      isActive: function(characters) {
-        return characters.characterBase.currentActivityHash > 0;
-      },
-
       checkActivity: function() {
         try {
           console.log('Reload Method Fired!')
@@ -81,7 +79,17 @@ new Vue({
         } catch (e) {
           console.log('Error from checkActivity' + e)
         }
-      }
+      },
+
+      resolveActivity: co.wrap(function *() {
+        let vm = this
+        let activity = vm.activeCharacter.characterBase.currentActivityHash
+
+        vm.activity = yield getActivity(activity)
+
+
+
+      })
     },
 
     computed: {}
