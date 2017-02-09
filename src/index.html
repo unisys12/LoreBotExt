@@ -41,23 +41,32 @@
                     <div class="assemble-button">
                         <button v-on:click="{{ checkActivity() }}">Get Characters</button>
                     </div>
-                    <div class="message">
-                        {{ message }}
-                    </div>
                 </div>
                 <hr>
             </section>
-            <section class="character-display">
+            <section class="character-display" v-if="activeCharacter === ''">
                 // Character Infomation Displyed Here!
-                /* Should contain an option to view Loadout Lore */
-                <div v-for="character in characterBase">
-                    <img v-bind:src="'http://www.bungie.net'+character.emblemPath">
-                    <img v-bind:src="'http://www.bungie.net'+character.backgroundPath">
-                </div>
+                <h3>{{ message }}</h3>
             </section>
-            <section class="activity-display">
-                // Display Current Activity Title and Base Info
+            <section class="character-display" v-else>                
+                <img :src="'http://www.bungie.net' + activeCharacter.emblemPath" class="emblem">
+                <img :src="'http://www.bungie.net' + activeCharacter.backgroundPath" class="background">
+                <span><h2>{{ activeCharacter.characterBase.classHash }}</h2></span>
+                <span><h2>{{ activeCharacter.characterBase.raceHash }}</h2></span>
+                <span><h2>{{ activeCharacter.characterBase.genderHash }}</h2></span> 
+                <span><h2>{{ activeCharacter.characterLevel }}</h2></span> 
+                <span><h2>{{ activeCharacter.characterBase.powerLevel }}</h2></span>        
             </section>
+
+            <section class="activity-display" v-for="activities in activity.data.Response">
+                <img :src="'http://www.bungie.net' + activities.activity.pgcrImage " alt="background">
+                <img :src="'http://www.bungie.net' + activities.activity.icon" alt="icon">
+                <h3>{{ activities.activity.activityName }}</h3>
+                <section>
+                    <span><h4>{{ activities.activity.activityDescription }}</h4></span>
+                </section>
+            </section>
+            
             <section class="card-display">
                 // Display cards related to current activity
             </section>
