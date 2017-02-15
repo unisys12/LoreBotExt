@@ -28,8 +28,6 @@ new Vue({
           
           let response = yield getIdByDisplayName(vm.membershipType, vm.displayName)
 
-          console.log('ID: ' + response.data.Response)
-
           vm.membershipId = response.data.Response;
           
           if (vm.membershipId === '') {
@@ -56,7 +54,7 @@ new Vue({
           }
 
           // Just for displaying that we successfully grabed an active character
-          if (vm.activeCharacter) {
+          if (vm.activeCharacter != '') {
             console.log('Active Character: ' + JSON.stringify(vm.activeCharacter))
             yield this.resolveActivity
           } else {
