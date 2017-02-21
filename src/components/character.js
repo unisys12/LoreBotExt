@@ -1,7 +1,7 @@
 'use strict'
 
 import Vue from 'vue'
-import { getIdByDisplayName, getSummary, getActivity } from '../Bungie/api.js'
+import { getIdByDisplayName, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
 let co = require('co')
 
 
@@ -16,6 +16,9 @@ new Vue({
         membershipId: '',
         characterBase: [],
         activeCharacter: '',
+        characterGender: '',
+        characterRace: '',
+        characterClass: '',
         activity: ''
     },
 
@@ -39,13 +42,13 @@ new Vue({
           
           response = yield getSummary(vm.membershipType, vm.membershipId)
 
-          // Assign the character object of the response to a var
           vm.characterData = response.data.Response.data;
 
           let chars = vm.characterData.characters
 
-          vm.characterBase = []; // reset the array - forces Vue to refresh
+          vm.characterBase = [];
 
+          // Find any active characters
           for (let i = 0; i < chars.length; i++) {
             vm.characterBase.push(chars[i]);
             if (chars[i].characterBase.currentActivityHash > 0) {
@@ -53,15 +56,14 @@ new Vue({
             };
           }
 
-          // Just for displaying that we successfully grabed an active character
           if (vm.activeCharacter != '') {
-            //console.log('Active Character: ' + JSON.stringify(vm.activeCharacter))
+            vm.characterRace = yield getRace(vm.activeCharacter.characterBase.raceHash)
+            vm.characterClass = yield getClass(vm.activeCharacter.characterBase.classHash)
+            vm.characterGender = yield getGender(vm.activeCharacter.characterBase.genderHash)
             yield this.resolveActivity
           } else {
-            console.log('It seems the player with the ID of ' + vm.membershipId + ' doesn\'t have any active characters.')
             vm.message = 'None of your characters seem to be in an activity'
-          }   
-
+          }
 
         } catch (err) {
           console.error(err);
@@ -82,18 +84,12 @@ new Vue({
       resolveActivity: co.wrap(function *() {
         let vm = this
         let activity = vm.activeCharacter.characterBase.currentActivityHash
-
-        console.log("Currect Activity is: " + activity)
-
         let act = yield getActivity(activity)
 
         vm.activity = act.data.Response.data.activity
-
-        console.log("Take a look at the activity closer: ", vm.activity)
-
       })
     },
 
-    computed: {}
+    computed: { }
 
 })
