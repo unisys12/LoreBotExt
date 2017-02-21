@@ -48,9 +48,9 @@
                 <section class="character-display">
                     <img :src="'http://www.bungie.net' + activeCharacter.emblemPath" class="emblem">
                     <img :src="'http://www.bungie.net' + activeCharacter.backgroundPath" class="background">
-                    <span><h2>{{ activeCharacter.characterBase.classHash }}</h2></span>
-                    <span><h2>{{ activeCharacter.characterBase.raceHash }}</h2></span>
-                    <span><h2>{{ activeCharacter.characterBase.genderHash }}</h2></span> 
+                    <span><h2>{{ characterClass.data.Response.data.class.className }}</h2></span>
+                    <span><h2>{{ characterRace.data.Response.data.race.raceName }}</h2></span>
+                    <span><h2>{{ characterGender.data.Response.data.gender.genderName }}</h2></span> 
                     <span><h2>{{ activeCharacter.characterLevel }}</h2></span> 
                     <span><h2>{{ activeCharacter.characterBase.powerLevel }}</h2></span>
                 </section>
