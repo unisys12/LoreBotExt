@@ -55,7 +55,7 @@ new Vue({
 
           // Just for displaying that we successfully grabed an active character
           if (vm.activeCharacter != '') {
-            console.log('Active Character: ' + JSON.stringify(vm.activeCharacter))
+            //console.log('Active Character: ' + JSON.stringify(vm.activeCharacter))
             yield this.resolveActivity
           } else {
             console.log('It seems the player with the ID of ' + vm.membershipId + ' doesn\'t have any active characters.')
@@ -83,9 +83,13 @@ new Vue({
         let vm = this
         let activity = vm.activeCharacter.characterBase.currentActivityHash
 
-        vm.activity = yield getActivity(activity)
+        console.log("Currect Activity is: " + activity)
 
+        let act = yield getActivity(activity)
 
+        vm.activity = act.data.Response.data.activity
+
+        console.log("Take a look at the activity closer: ", vm.activity)
 
       })
     },

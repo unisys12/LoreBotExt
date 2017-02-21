@@ -46,7 +46,6 @@
             </section>
             <div v-if="activeCharacter != ''">
                 <section class="character-display">
-                    <h2>{{ activeCharacter }}</h2>
                     <img :src="'http://www.bungie.net' + activeCharacter.emblemPath" class="emblem">
                     <img :src="'http://www.bungie.net' + activeCharacter.backgroundPath" class="background">
                     <span><h2>{{ activeCharacter.characterBase.classHash }}</h2></span>
@@ -55,12 +54,12 @@
                     <span><h2>{{ activeCharacter.characterLevel }}</h2></span> 
                     <span><h2>{{ activeCharacter.characterBase.powerLevel }}</h2></span>
                 </section>
-                <section class="activity-display" v-for="activities in activity.data.Response">
-                    <img :src="'http://www.bungie.net' + activities.activity.pgcrImage " alt="background">
-                    <img :src="'http://www.bungie.net' + activities.activity.icon" alt="icon">
-                    <h3>{{ activities.activity.activityName }}</h3>
+                <section class="activity-display">
+                    <h3>{{ activity.activityName }}</h3>
+                    <img :src="'http://www.bungie.net' + activity.pgcrImage" alt="background">
+                    <img :src="'http://www.bungie.net' + activity.icon" alt="icon">
                     <section>
-                        <span><h4>{{ activities.activity.activityDescription }}</h4></span>
+                        <span><h4>{{ activity.activityDescription }}</h4></span>
                     </section>
                 </section>
             </div>
@@ -80,6 +79,6 @@
                 // Display category details related to current activity
             </section>
         </main>
-        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="./index.js"></script>
     </body>
 </html>
