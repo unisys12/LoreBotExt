@@ -19,17 +19,17 @@ function getSummary(membershipType, membershipId) {
 
 function getRace(raceHash) {
     return axios('http://www.bungie.net/Platform/Destiny/' + 
-    '/Manifest/8' + raceHash)
+    '/Manifest/8/' + raceHash)
 }
 
 function getGender(genderHash) {
     return axios('http://www.bungie.net/Platform/Destiny/' + 
-    '/Manifest/4' + genderHash)
+    '/Manifest/4/' + genderHash)
 }
 
 function getClass(classHash) {
     return axios('http://www.bungie.net/Platform/Destiny/' + 
-    '/Manifest/3' + classHash)
+    '/Manifest/3/' + classHash)
 }
 
 function getActivity(definitionId) {
