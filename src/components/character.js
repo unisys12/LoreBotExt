@@ -57,9 +57,25 @@ new Vue({
           }
 
           if (vm.activeCharacter != '') {
-            vm.characterRace = yield getRace(vm.activeCharacter.characterBase.raceHash)
-            vm.characterClass = yield getClass(vm.activeCharacter.characterBase.classHash)
-            vm.characterGender = yield getGender(vm.activeCharacter.characterBase.genderHash)
+            // Will extract the following three maps to a single method later
+            let characterRace = []
+            characterRace.push(yield getRace(vm.activeCharacter.characterBase.raceHash))
+            characterRace.map((x)=>{
+              vm.characterRace = x.data.Response.data.race.raceName
+            })
+
+            let characterClass = []
+            characterClass.push(yield getClass(vm.activeCharacter.characterBase.classHash))
+            characterClass.map((x)=>{
+              vm.characterClass = x.data.Response.data.classDefinition.className
+            })
+
+            let characterGender = []
+            characterGender.push(yield getGender(vm.activeCharacter.characterBase.genderHash))
+            characterGender.map((x)=>{
+              vm.characterGender = x.data.Response.data.gender.genderName
+            })
+
             yield this.resolveActivity
           } else {
             vm.message = 'None of your characters seem to be in an activity'
