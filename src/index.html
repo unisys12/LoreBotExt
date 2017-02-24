@@ -17,9 +17,6 @@
             <div class="title">
                 <h1>LoreBot Chrome Extension <small>{{ getAppVersion }}</small></h1>
             </div>
-            <div>
-                <h3>{{ message }}</h3>
-            </div>
         </header>
         <main id="character">
             <section class="main-header">
@@ -70,11 +67,13 @@
                 </section>
             </div>            
             
-            <section class="card-display">
-                // Display cards related to current activity
+            <section class="card-display" v-show="activity != ''">
+                <div>
+                    <p v-html=grimoireCard.description></p>
+                </div>
             </section>
-            <section class="category-display">
-                // Display category details related to current activity
+            <section class="category-display" v-show="activity != ''">
+                <pre>{{ grimoireCard.categories }}</pre>
             </section>
         </main>
         <script type="text/javascript" src="./index.js"></script>

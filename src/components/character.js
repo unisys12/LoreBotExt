@@ -2,6 +2,7 @@
 
 import Vue from 'vue'
 import { getIdByDisplayName, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
+import Ishtar from '../Ishtar/api'
 let co = require('co')
 
 
@@ -19,7 +20,9 @@ new Vue({
         characterGender: '',
         characterRace: '',
         characterClass: '',
-        activity: ''
+        activity: '',
+        grimoireCard: '',
+        grimoireCategoriesURI: ''
     },
 
     methods: {
@@ -74,16 +77,22 @@ new Vue({
             characterGender.push(yield getGender(vm.activeCharacter.characterBase.genderHash))
             characterGender.map((x)=>{
               vm.characterGender = x.data.Response.data.gender.genderName
-            })
+            })    
 
-            yield this.resolveActivity
+            //yield this.resolveActivity
+            let activity = vm.activeCharacter.characterBase.currentActivityHash
+            let act = yield getActivity(activity)
+
+            vm.activity = act.data.Response.data.activity
+
+            yield this.fetchActivityCards(vm.activity.activityName)  
           } else {
             vm.message = 'None of your characters seem to be in an activity'
           }
 
         } catch (err) {
           console.error(err);
-          vm.message = 'Failed to assemble characters: ' + err.statusText;
+          vm.message = 'Failed to assemble characters: ' + err;
         }
           
       }),
@@ -103,9 +112,32 @@ new Vue({
         let act = yield getActivity(activity)
 
         vm.activity = act.data.Response.data.activity
-      })
+      }),
+
+      fetchActivityCards: co.wrap(function *(string) {
+        console.log('fetchActivityCards has been fired!')
+        let vm = this
+        let cards = yield Ishtar.getCards(this.processSlug(string))
+        vm.grimoireCard = cards.data.grimoire_card
+        
+      }),
+
+      processSlug: function(string) {
+        
+        let input = string
+        .toLowerCase()
+        .replace(":", "")
+        .replace("'", "")
+        .replace(/\s+/g, "-")
+        
+        return input
+      }
     },
 
-    computed: { }
+    computed: {
+
+      
+
+    }
 
 })

@@ -14,7 +14,8 @@
     ]
   },
   "permissions": [
-    "*://*.bungie.net/*"
+    "*://*.bungie.net/*",
+    "*://*.ishtar-collective.net/*"
   ],
   "browser_action": {
     "default_icon": {
