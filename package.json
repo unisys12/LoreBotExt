@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha test --recursive",
     "dev": "webpack --config webpack.config.js --watch",
-    "style": "sass --watch src/styles:assets/style.css",
+    "style": "sass --watch src/styles/style.sass:assets/style.css",
     "dev-build": "browserify src/core.js -t babelify --outfile src/index.js"
   },
   "repository": "https://github.com/unisys12/LoreBotExt.git",
