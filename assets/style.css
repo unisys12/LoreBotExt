@@ -45,4 +45,11 @@
         .container .character-display .stats .character-race span:nth-child(2) {
           padding-right: 17em; }
 
+.activity-display #background {
+  max-height: 240px;
+  max-width: 600px; }
+.activity-display #icon {
+  margin-left: -600px;
+  margin-top: -240px; }
+
 /*# sourceMappingURL=style.css.map */
