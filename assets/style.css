@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+* {
+  box-sizing: border-box; }
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0.5em 2em; }
+  .container header {
+    display: flex; }
+  .container .inputs {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start; }
+    .container .inputs div:nth-child(2) {
+      padding: 0 3em; }
+  .container .character-display {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 2em; }
+    .container .character-display .character-emblem {
+      display: flex;
+      height: 96px; }
+      .container .character-display .character-emblem .emblem {
+        z-index: 1; }
+      .container .character-display .character-emblem .background {
+        margin-left: -96px; }
+    .container .character-display .stats {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: stretch;
+      margin-left: -370px;
+      width: 360px;
+      color: white;
+      font-family: Roboto; }
+      .container .character-display .stats .character-clevel {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between; }
+      .container .character-display .stats .character-race {
+        display: flex;
+        flex-flow: row nowrap; }
+        .container .character-display .stats .character-race span:nth-child(1) {
+          padding-right: 0.5em; }
+        .container .character-display .stats .character-race span:nth-child(2) {
+          padding-right: 17em; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,65 @@
+* 
+    box-sizing: border-box
+
+.container
+    display: flex
+    flex-flow: column nowrap
+    margin: .5em 2em
+
+    header
+        display: flex
+
+    .main-header
+        display:flex
+
+    .inputs
+        display: flex
+        flex-flow: row nowrap
+        justify-content: flex-start
+
+        div:nth-child(1)
+        // Just in Case
+        div:nth-child(2)
+            padding: 0 3em
+
+        div:nth-child(1)
+        // Just in Case
+
+    .character-display
+        display: flex
+        flex-flow: row nowrap
+        margin-top: 2em
+        
+        .character-emblem
+            display: flex
+            height: 96px
+
+            .emblem
+                z-index: 1
+
+            .background
+                margin-left: -96px
+
+        .stats
+            display: flex
+            flex-flow: column nowrap
+            align-items: stretch
+            margin-left: -370px
+            width: 360px
+            color: white
+            font-family: Roboto
+
+            .character-clevel
+                display: flex
+                flex-flow: row nowrap
+                justify-content: space-between
+
+            .character-race
+                display: flex
+                flex-flow: row nowrap
+
+                span:nth-child(1)
+                    padding-right: .5em
+
+                span:nth-child(2)
+                    padding-right: 17em
