@@ -2,9 +2,10 @@
 
 let path = require('path')
 let CopyWebpackPlugin = require('copy-webpack-plugin')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-    entry: ['babel-polyfill', './src/core.js'],
+    entry: ['babel-polyfill', './src/index.js'],
     output: {
         filename: 'index.js',
         path: './dist/'
@@ -20,14 +21,5 @@ module.exports = {
             }
         }]
     },
-    plugins: [
-        new CopyWebpackPlugin([
-            { from: './src/images/', to: 'images/' },
-            { from: './src/index.html', to: '.' },
-            { from: './src/manifest.json', to: '.'},
-            { from: './src/background.js', to: '.' }
-        ], 
-            { copyUnmodified: true } // when we get watch up and going, we can remove this
-        )
-    ]
+    plugins: []
 }
