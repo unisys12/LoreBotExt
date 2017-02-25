@@ -12,6 +12,8 @@ new Vue({
 
     data: {
         message: 'Waiting for your characters to enter an activity...',
+        cardMessage: 'Sorry, there does not seem to be a Grimoire Card for this activity... BOO!',
+        categoryMessage: '',
         displayName: '',
         membershipType: '',
         membershipId: '',
@@ -114,20 +116,28 @@ new Vue({
         vm.activity = act.data.Response.data.activity
       }),
 
+      /**
+       * TO-DO 
+       * =====
+       * Need to better handle activities that do not have a Grimoire Card
+       * so we don't spam ishtar api with bad requests. What is below does
+       * properly display a message, but does not stop calling ishtar api.
+       */
       fetchActivityCards: co.wrap(function *(string) {
-        console.log('fetchActivityCards has been fired!')
+        
         let vm = this
         let cards = yield Ishtar.getCards(this.processSlug(string))
-        vm.grimoireCard = cards.data.grimoire_card
         
-      }),
+        if(cards.request.status === 200){
+          vm.grimoireCard = cards.data.grimoire_card
+        }        
+      
+    }),
 
-      processSlug: function(string) {
-        
+      processSlug: function(string) {        
         let input = string
         .toLowerCase()
-        .replace(":", "")
-        .replace("'", "")
+        .replace(/[.*+?^${}()':|[\]\\]/g, "")
         .replace(/\s+/g, "-")
         
         return input
