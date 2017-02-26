@@ -30,6 +30,7 @@
       flex-flow: column nowrap;
       align-items: stretch;
       margin-left: -370px;
+      margin-top: -0.5em;
       width: 360px;
       color: white;
       font-family: Roboto; }
