@@ -11,8 +11,8 @@ let Ishtar = (()=> {
             return Axios('http://api.ishtar-collective.net/items/' + string)
         },
 
-        getCategories: (string)=> {
-            return Axios('http://api.ishtar-collective.net/categories/' + string)
+        getCategories: (url)=> {
+            return Axios(url)
         }
     }
 
