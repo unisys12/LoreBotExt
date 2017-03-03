@@ -24,7 +24,7 @@ new Vue({
         characterClass: '',
         activity: '',
         grimoireCard: '',
-        grimoireCategoriesURI: ''
+        grimoireCategories: ''
     },
 
     methods: {
@@ -128,11 +128,28 @@ new Vue({
         let vm = this
         let cards = yield Ishtar.getCards(this.processSlug(string))
         
+        // Store grimoire card data
         if(cards.request.status === 200){
           vm.grimoireCard = cards.data.grimoire_card
-        }        
+        }
+
+        // While we're at it, store any category data as well
+        if(cards.data.grimoire_card.categories) {
+          vm.grimoireCategories = cards.data.grimoire_card.categories
+        }      
       
     }),
+
+    // fetchCategories: co.wrap(function *(url) {
+
+    //   let vm = this
+    //   let category = yield Ishtar.getCategories(url)
+
+    //   category.map( (x)=>{
+    //     let vm.
+    //   })
+
+    // }),
 
       processSlug: function(string) {        
         let input = string
