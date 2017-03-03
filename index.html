@@ -138,7 +138,19 @@
             
             <!-- Grimoire Categories Display Area -->
             <section class="category-display" v-if="activity != ''">
-                <pre>{{ grimoireCard.categories }}</pre>
+                <!--<pre>{{ grimoireCard.categories }}</pre>-->
+                <div class="columns" v-for="category in grimoireCard.categories">
+                    <section class="card column">
+                        <div class="card-header">
+                            <p class="header-title">{{ category.name }}</p>
+                        </div>
+                        <article class="card-content">
+                            <section class="content">
+                                // api.results
+                            </section>
+                        </article>
+                    </section>
+                </div>
             </section>
             <section class="category-display" v-else>
                 <!-- TO DO -->
