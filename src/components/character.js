@@ -140,17 +140,6 @@ new Vue({
       
     }),
 
-    // fetchCategories: co.wrap(function *(url) {
-
-    //   let vm = this
-    //   let category = yield Ishtar.getCategories(url)
-
-    //   category.map( (x)=>{
-    //     let vm.
-    //   })
-
-    // }),
-
       processSlug: function(string) {        
         let input = string
         .toLowerCase()
