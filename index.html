@@ -17,107 +17,134 @@
     <body>
         <section class="hero is-medium is-primary is-bold">
             <div class="hero-head">
-                <div class="container">
-                    <header id="app-header" class="">
-                        <div class="column">
-                            <h1 class="title">LoreBot Chrome Extension <small>{{ getAppVersion }}</small></h1>
+                <header id="app-header" class="nav">
+                    <div class="container">
+                        <div class="nav-left">
+                            <a href="index.html" class="nav-item">
+                                <h1 class="title">LoreBot Chrome Extension <small>v{{ getAppVersion }}</small></h1>
+                            </a>                         
                         </div>
-                    </header>
-                </div>
+                        <div class="nav-right">
+                            <div class="nav-item">
+                                <p>Bringing Destiny In-Game Lore to Your Browser</p>
+                            </div>
+                        </div>
+                    </div>           
+                </header>
             </div>
+        </section>
 
-            <section class="hero-body" id="character">
-                <div class="container">
-                    <div class="columns">
-                        <section class="column is-half" id="inputs">
-                            <label class="label" for="membershipType">Console Type: </label>
-                            <select name="membershipType" id="membershipType" autofocus="true" v-model="membershipType">
-                                <option value=""></option>
-                                <option value="1">XBOX</option>
-                                <option value="2">PSN</option>
-                            </select>
-                            
-                            <div class="gamertag-input">
-                                <label class="label" for="displayName">Gamertag: </label>
-                                <input type="text" name="displayName" v-model="displayName">
-                            </div>
-                            
-                            <button class="button" v-on:click="{{ checkActivity() }}">Get Characters</button>
-               
-                        </section>
-
-                        <!-- Active Character Display Area -->
-                        <section v-if="activeCharacter != ''" class="column is-middle">
-                            <div class="character-emblem">
-                                <figure class="background">
-                                    <img :src="'http://www.bungie.net' + activeCharacter.backgroundPath" >
-                                </figure>
-                                <figure class="emblem">
-                                    <img :src="'http://www.bungie.net' + activeCharacter.emblemPath" >
-                                </figure>                                
-                                <div class="stats columns">
-                                    <div class="character-clevel content">
-                                        <span id="character-class"><h2>{{ characterClass }}</h2></span>
-                                        <span id="character-level"><h2>{{ activeCharacter.characterLevel }}</h2></span>
-                                    </div>
-                                    <div class="character-race content">
-                                        <span id="character-race"><h2>{{characterRace}}</h2></span>
-                                        <span id="character-gender"><h2>{{ characterGender}}</h2></span>
-                                        <span id="character-powerlevel"><h2>{{ activeCharacter.characterBase.powerLevel }}</h2></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- If No Active Character -->
-                        <section v-else>
-                            <section class="column is-middle">
-                                <article class="notification is-info">
-                                    <div class="content">
-                                        <h3>{{ message }}</h3>
-                                    </div>
-                                </article>
-                            </section>
-                        </section>
-                    </div>
+        <section class="container" id="character">
+            <section class="level" id="inputs">
+                <div class="level-item">
+                    <label class="label" for="membershipType">Console Type: </label>
+                </div>
+                <div class="level-item">
+                    <select name="membershipType" id="membershipType" autofocus="true" v-model="membershipType" class="level-item">
+                        <option value=""></option>
+                        <option value="1">XBOX</option>
+                        <option value="2">PSN</option>
+                    </select>
+                </div>
+                <div class="level-item">
+                    <label for="displayName" class="label level-item">Gamertag: </label>
+                </div>
+                <div class="level-item">
+                    <input type="text" name="displayName" v-model="displayName" class="label level-item">
+                </div>
+                <div class="level-item">
+                    <button class="button level-item" v-on:click="{{ checkActivity() }}">Get Characters</button>
                 </div>
             </section>
-        </section>
-                    
 
-            <!-- Current Activity Display Area -->
-            <!--<section v-if="activeCharacter != ''" class="column">
-                <div class="column">
-                    <h2>{{ activity.activityName }}</h2>
-                    <h3>{{ activity.activityDescription }}</h3>
+            <!-- Active Character Display Area -->
+            <section class="container outter" v-if="activeCharacter != ''">
+                <div class="columns badge">
+                    <div class="column emblem is-1" 
+                        :style="{ 'background': 'url(http://bungie.net' + activeCharacter.emblemPath + ') no-repeat' }">
+                    </div>
+                    <div class="column stats" 
+                        :style="{ 'background': 'url(http://bungie.net' + activeCharacter.backgroundPath + ') no-repeat' }">
+                        <div class="columns" >
+                            <div class="column class">
+                                <p>{{ characterClass }}</p>
+                            </div>
+                            <div class="column blevel is-1">
+                                <p>{{ activeCharacter.characterLevel }}</p>
+                            </div>
+                        </div>
+                    <div class="columns">
+                        <div class="column race is-1">
+                            <p>{{characterRace}}</p>
+                        </div>
+                        <div class="column gender">
+                            <p>{{ characterGender}}</p>
+                        </div>
+                        <div class="column plevel is-1">
+                            <p>{{ activeCharacter.characterBase.powerLevel }}</p>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-                <div class="column">
-                    <img :src="'http://www.bungie.net' + activity.pgcrImage" alt="background" id="background">
-                    <img :src="'http://www.bungie.net' + activity.icon" alt="icon" id="icon">
-                </div>
-            </section>-->
 
-            <!-- Grimoire Card Display Area -->
-            <!--<section v-show="activity != ''">
-                <section class="card-display" v-if="grimoireCard.description">
-                    <div>
-                        <h3>Grimoire Card: </h3>
-                        <p v-html=grimoireCard.description></p>
+                <!-- Current Activity Display Area -->
+                <section if="activeCharacter != ''" class="columns activity">
+                    <div class="column activityImage">
+                        <figure class="activityBackground">
+                            <img :src="'http://www.bungie.net' + activity.pgcrImage" alt="activityBackground">
+                        </figure>
+                        <figure class="activityIcon">
+                            <img :src="'http://www.bungie.net' + activity.icon" alt="activityIcon">
+                        </figure>
+                    </div>
+                    <div class="column content">
+                        <h2>{{ activity.activityName }}</h2>
+                        <h3>{{ activity.activityDescription }}</h3>
                     </div>
                 </section>
-                <section class="card-display" v-else>
+            </section>
+            
+            <section class="columns" v-else>
+                <article class="column notification is-info">
+                    <p>{{ message }}</p>
+                </article>
+            </section>
+
+            <!-- Grimoire Card Display Area -->
+            <section v-if="activity != ''" class="columns cards">
+                <article class="column content card-text"  v-if="grimoireCard.description">
+                    <h2>{{ grimoireCard.name }}</h2>
+                    <div v-show="grimoireCard.intro != null">
+                        <p v-html="grimoireCard.intro"></p>
+                    </div>
+                    <div v-show="grimoireCard.intro_attribution != null">
+                        <p v-html="grimoireCard.intro_attribution"></p>
+                    </div>
+                    <div v-show="grimoireCard.description">
+                        <p v-html="grimoireCard.description"></p>
+                    </div>
+                </article>
+
+                <!-- If No Grimoire Card -->
+                <article class="column" v-else>
                     <h3>Card Message: </h3>
                     <p>{{ cardMessage }}</p>
-                </section>
-            </section>-->
+                </article>
+
+                <figure class="column image">
+                    <img :src="'http://bungie.net' + grimoireCard.image_url" alt="card-image">
+                </figure>                
+            </section>
             
             <!-- Grimoire Categories Display Area -->
-            <!--<section class="category-display" v-if="activity != ''">
+            <section class="category-display" v-if="activity != ''">
                 <pre>{{ grimoireCard.categories }}</pre>
             </section>
             <section class="category-display" v-else>
                 <!-- TO DO -->
-                <!--<p>{{ categoryMessage }}</p>
-            </section>-->
+                <p>{{ categoryMessage }}</p>
+            </section>
+        
         </section>
 
         <script type="text/javascript" src="dist/index.js"></script>

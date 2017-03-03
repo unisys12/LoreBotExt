@@ -146,8 +146,6 @@ new Vue({
 
     computed: {
 
-      
-
     }
 
 })

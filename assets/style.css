@@ -2,25 +2,39 @@
 * {
   box-sizing: border-box; }
 
-.gamertag-input {
-  padding: 2em 0; }
+#inputs {
+  padding-top: 1em; }
 
-.character-emblem {
-  height: 96px; }
-  .character-emblem .emblem {
+.outter {
+  padding-top: 0;
+  padding-bottom: 2em;
+  padding-left: 0.75em; }
+  .outter .emblem {
     z-index: 1; }
-  .character-emblem .background {
-    margin-bottom: 101px; }
+  .outter .stats {
+    max-width: 474px;
+    color: white;
+    margin-left: -95px; }
+    .outter .stats .class {
+      margin-left: 90px; }
+    .outter .stats .blevel {
+      font-size: 150%;
+      margin-right: 4px; }
+    .outter .stats .race {
+      margin-left: 90px; }
+    .outter .stats .gender {
+      margin-left: 15px; }
 
-.stats {
-  color: white;
-  font-family: Roboto; }
+.activity {
+  padding: 2em 0;
+  margin-left: -1.5em; }
 
-.activity-display #background {
-  max-height: 240px;
-  max-width: 600px; }
-.activity-display #icon {
-  margin-left: -600px;
-  margin-top: -240px; }
+.activityImage {
+  height: 240px; }
+  .activityImage .activityIcon {
+    margin-top: -95px; }
+
+.card-display {
+  padding-top: 0 2em; }
 
 /*# sourceMappingURL=style.css.map */
