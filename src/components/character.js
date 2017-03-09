@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import { getIdByDisplayName, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
 import Ishtar from '../Ishtar/api'
+import grimoireDefinitions from '../Bungie/grimoireDefs'
 let co = require('co')
 
 
@@ -126,17 +127,17 @@ new Vue({
       fetchActivityCards: co.wrap(function *(string) {
         
         let vm = this
-        let cards = yield Ishtar.getCards(this.processSlug(string))
-        
+        //let cards = yield Ishtar.getCards(this.processSlug(string))
+        let cards = yeild 
         // Store grimoire card data
-        if(cards.request.status === 200){
-          vm.grimoireCard = cards.data.grimoire_card
-        }
+        // if(cards.request.status === 200){
+        //   vm.grimoireCard = cards.data.grimoire_card
+        // }
 
         // While we're at it, store any category data as well
-        if(cards.data.grimoire_card.categories) {
-          vm.grimoireCategories = cards.data.grimoire_card.categories
-        }      
+        // if(cards.data.grimoire_card.categories) {
+        //   vm.grimoireCategories = cards.data.grimoire_card.categories
+        // }      
       
     }),
 
