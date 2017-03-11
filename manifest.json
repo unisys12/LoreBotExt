@@ -7,7 +7,7 @@
     "16": "assets/images/favicon-16.png",
     "128": "assets/images/favicon-128.png"
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval' object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'self'",
   "background": {
     "scripts": [
         "background.js"

@@ -5,8 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Bring Destiny Grimoire to the browser while you play">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css" />
-        <link rel="stylesheet" href="assets/style.css">
+        <link rel="stylesheet" href="assets/css/bulma.css" />
+        <link rel="stylesheet" href="assets/css/style.css" />
         <title>LoreBot Extension</title>
         <link rel="icon" type="image/png" href="assets/images/favicon-196.png" sizes="196x196" />
         <link rel="icon" type="image/png" href="assets/images/favicon-96.png" sizes="96x96" />
@@ -148,10 +148,20 @@
             <section class="category-display" v-else>
                 <!-- TO DO -->
                 <p>{{ categoryMessage }}</p>
-            </section>
-        
+            </section>        
         </section>
-
+        <footer class="footer">
+            <div class="container">
+                <div class="content has-text-centered">
+                    <p>
+                        <strong>LoreBot </strong> Chrome Extension brought to you by <a href="https://twitter.com/unisys12">@unisys12</a>.
+                        Feedback and suggestions are welcome. Just reach out to me on Twitter or email me at unisys12@gmail.com. If you
+                        like to contribute to this project in anyway, you can find at its project home on 
+                        <a href="https://github.com/unisys12/LoreBotExt">Github.</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
         <script type="text/javascript" src="dist/index.js"></script>
     </body>
 </html>
