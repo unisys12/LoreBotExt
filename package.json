@@ -1,6 +1,6 @@
 {
   "name": "lorebotext",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Deliver in-game lore to players of Destiny through a chrome extension",
   "main": "dist/index.js",
   "scripts": {
@@ -14,18 +14,13 @@
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
-    "babel-cli": "^6.18.0",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.22.0",
     "babel-preset-env": "^1.1.8",
-    "babel-watch": "^2.0.5",
-    "babelify": "^7.3.0",
     "chai": "^3.5.0",
-    "copy-webpack-plugin": "^4.0.1",
     "dotenv": "^4.0.0",
     "eslint": "^3.13.1",
-    "extract-text-webpack-plugin": "^2.0.0",
     "mocha": "^3.2.0",
     "sinon": "^1.17.7",
     "webpack": "^2.2.1"

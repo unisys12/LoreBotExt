@@ -1,8 +1,6 @@
 'use strict'
 
 let path = require('path')
-let CopyWebpackPlugin = require('copy-webpack-plugin')
-let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     entry: ['babel-polyfill', './src/index.js'],
