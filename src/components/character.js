@@ -128,27 +128,17 @@ new Vue({
         
         let vm = this
         //let cards = yield Ishtar.getCards(this.processSlug(string))
-        let cards = yeild 
-        // Store grimoire card data
-        // if(cards.request.status === 200){
-        //   vm.grimoireCard = cards.data.grimoire_card
-        // }
-
-        // While we're at it, store any category data as well
-        // if(cards.data.grimoire_card.categories) {
-        //   vm.grimoireCategories = cards.data.grimoire_card.categories
-        // }      
+        if(vm.activity != '') {
+          let cards = yield grimoireDefinitions.fetchCards(string)
+          
+          // Store grimoire card data
+          if(cards.request.status === 200){
+            vm.grimoireCard = yield cards.data.grimoire_card
+          } 
+        }             
       
-    }),
+      }),
 
-      processSlug: function(string) {        
-        let input = string
-        .toLowerCase()
-        .replace(/[.*+?^${}()':|[\]\\]/g, "")
-        .replace(/\s+/g, "-")
-        
-        return input
-      }
     },
 
     computed: {

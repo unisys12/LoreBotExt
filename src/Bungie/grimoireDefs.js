@@ -2,15 +2,15 @@ const loki = require('lokijs')
 const co = require('co')
 import DestinyQueries from './DestinyQueries'
 
-const db = new loki('grimoire.db')
+const db = new loki('grimoire.json')
 const defs = db.addCollection('grimoireDefinitions')
 
 let grimoireDefinitions = (()=>{
 
-    let fetchDB = co.wrap(function *(){
-        console.log('Fetching Grimoire Data...')
-        let dbres = yield destinyQueries.grimoireDefinition()
-          
+    async function fetchDB() {
+
+        let dbres = await DestinyQueries.grimoireDefinition()
+
         if (dbres.status === 200) {
             let dbresData = dbres.data
             let defObj = []
@@ -30,34 +30,37 @@ let grimoireDefinitions = (()=>{
             return dbres
         }
 
-    })
+    }
 
-    let insertGrimoire = co.wrap(function *(){
+    async function insertGrimoire() {
 
-        let data = yield fetchDB()
+        let data = await fetchDB()
 
-        if(data.status === 200 ){
+        if(data){
             console.log('Inserting Grimoire Data into in-memory DB...')
-            defs.insert(defObj)
+            await defs.insert(data)
         }else{
-            console.log('There was an error inserting docs...', data.statusText)
-            return data.statusText
+            console.log('There was an error inserting docs...')
+            return 
         }           
 
-    })
+    }
 
     let fetchCards = co.wrap(function *(string){
 
-        if(db){
-            let results = defs.find({
-                cardName: {
-                    '$regex': '/'+string+'/'
-                }
-            })
+        let collData = defs.data
 
+        if(collData.length > 0){
+            let results = defs.find({
+                //'_id': string                
+                // Using RegEx
+                '_id': {
+                    '$regex': string
+                }
+            })            
             return results
-        }else{
-            insertGrimoire()
+        }else{            
+            yield insertGrimoire()
         }
 
     })
