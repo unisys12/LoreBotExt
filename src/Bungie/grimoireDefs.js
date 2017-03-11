@@ -37,7 +37,6 @@ let grimoireDefinitions = (()=>{
         let data = await fetchDB()
 
         if(data){
-            console.log('Inserting Grimoire Data into in-memory DB...')
             await defs.insert(data)
         }else{
             console.log('There was an error inserting docs...')
@@ -50,17 +49,15 @@ let grimoireDefinitions = (()=>{
 
         let collData = defs.data
 
-        if(collData.length > 0){
+        if(collData.length > 0){            
             let results = defs.find({
-                //'_id': string                
-                // Using RegEx
                 '_id': {
                     '$regex': string
                 }
-            })            
+            })
             return results
-        }else{            
-            yield insertGrimoire()
+        }else{
+            yield insertGrimoire()        
         }
 
     })
