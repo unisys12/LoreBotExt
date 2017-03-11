@@ -124,20 +124,20 @@ new Vue({
        * so we don't spam ishtar api with bad requests. What is below does
        * properly display a message, but does not stop calling ishtar api.
        */
-      fetchActivityCards: co.wrap(function *(string) {
+      fetchActivityCards: async function(string) {
         
         let vm = this
         //let cards = yield Ishtar.getCards(this.processSlug(string))
         if(vm.activity != '') {
-          let cards = yield grimoireDefinitions.fetchCards(string)
+          let cards = await grimoireDefinitions.fetchCards(string)
           
           // Store grimoire card data
-          if(cards.request.status === 200){
-            vm.grimoireCard = yield cards.data.grimoire_card
+          if(cards){
+            vm.grimoireCard = cards
           } 
         }             
       
-      }),
+      },
 
     },
 

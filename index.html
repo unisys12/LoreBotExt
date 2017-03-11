@@ -111,29 +111,15 @@
             </section>
 
             <!-- Grimoire Card Display Area -->
-            <section v-if="activity != ''" class="columns cards">
-                <article class="column content card-text"  v-if="grimoireCard.description">
-                    <h2>{{ grimoireCard.name }}</h2>
-                    <div v-show="grimoireCard.intro != null">
-                        <p v-html="grimoireCard.intro"></p>
-                    </div>
-                    <div v-show="grimoireCard.intro_attribution != null">
-                        <p v-html="grimoireCard.intro_attribution"></p>
-                    </div>
-                    <div v-show="grimoireCard.description">
-                        <p v-html="grimoireCard.description"></p>
-                    </div>
-                </article>
-
-                <!-- If No Grimoire Card -->
-                <article class="column" v-else>
-                    <h3>Card Message: </h3>
-                    <p>{{ cardMessage }}</p>
-                </article>
-
-                <figure class="column image">
-                    <img :src="'http://bungie.net' + grimoireCard.image_url" alt="card-image">
-                </figure>                
+            <section class="section" v-show="grimoireCard">
+                <div class="columns" v-for="card in grimoireCard">
+                   <article class="column content">
+                        <h2>{{ card._id }}</h2>
+                        <h4 v-html="card.cardIntro"></h4>
+                        <p v-html="card.cardDescription"></p>
+                   </article>
+                   <figure class="column image"><img :src="'https://bungie.net' + card.cardImage" alt="card-image"></figure>
+                </div>
             </section>
             
             <!-- Grimoire Categories Display Area -->
