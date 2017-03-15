@@ -52,15 +52,23 @@ new Vue({
 
           let chars = vm.characterData.characters
 
-          vm.characterBase = [];
+          /**
+           * TO-DO
+           * Extract the code below, to line 90 at least,
+           * to external file
+           */
+          let active = []
 
           // Find any active characters
           for (let i = 0; i < chars.length; i++) {
-            vm.characterBase.push(chars[i]);
             if (chars[i].characterBase.currentActivityHash > 0) {
-              vm.activeCharacter = chars[i];
+              active.push(chars[i]);
             };
           }
+
+          vm.activeCharacter = active[0]
+
+          console.log('Active Race Hash ', vm.activeCharacter.characterBase.raceHash)
 
           if (vm.activeCharacter != '') {
             // Will extract the following three maps to a single method later
