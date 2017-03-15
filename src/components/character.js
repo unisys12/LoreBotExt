@@ -68,8 +68,6 @@ new Vue({
 
           vm.activeCharacter = active[0]
 
-          console.log('Active Race Hash ', vm.activeCharacter.characterBase.raceHash)
-
           if (vm.activeCharacter != '') {
             // Will extract the following three maps to a single method later
             let characterRace = []
