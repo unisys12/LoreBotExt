@@ -50,6 +50,11 @@ new Vue({
             
             let response = yield getSummary(vm.membershipType, vm.membershipId)
 
+            if(response.data.ErrorCode != 1){
+              vm.message = response.data.ErrorStatus + ': ' + response.data.Message
+              return
+            }
+
             vm.characterData = response.data.Response.data;
 
             let chars = vm.characterData.characters
