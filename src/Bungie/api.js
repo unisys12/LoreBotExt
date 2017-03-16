@@ -9,6 +9,11 @@ const axios = Axios.create({
     }
 })
 
+// Hard coding `-1` for membershipType to search both PSN and XBL accounts for displayName
+function searchDestinyPlayer(displayName){
+    return axios('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/-1/' + displayName + '/')
+}
+
 function getIdByDisplayName(membershipType, displayName) {
     return axios('http://www.bungie.net/Platform/Destiny/' + membershipType + '/Stats/GetMembershipIdByDisplayName/' + displayName)
 }
@@ -38,6 +43,7 @@ function getActivity(definitionId) {
     definitionId + '/')
 }
 
+module.exports.searchDestinyPlayer = searchDestinyPlayer
 module.exports.getIdByDisplayName = getIdByDisplayName
 module.exports.getSummary = getSummary
 module.exports.getRace = getRace

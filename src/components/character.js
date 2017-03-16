@@ -1,7 +1,7 @@
 'use strict'
 
 import Vue from 'vue'
-import { getIdByDisplayName, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
+import { searchDestinyPlayer, getIdByDisplayName, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
 import Ishtar from '../Ishtar/api'
 import grimoireDefinitions from '../Bungie/grimoireDefs'
 let co = require('co')
@@ -35,68 +35,71 @@ new Vue({
           
           try {
           
-          let response = yield getIdByDisplayName(vm.membershipType, vm.displayName)
-
-          vm.membershipId = response.data.Response;
-          
-          if (vm.membershipId === '') {
-
-              vm.message = 'Failed to fetch your Bungie Membership ID'
+            let res = yield searchDestinyPlayer(vm.displayName)          
+            let player = res.data.Response
             
-              return;
-          }
-          
-          response = yield getSummary(vm.membershipType, vm.membershipId)
+            if(player.length > 0){
+              player.map((x)=>{
+                vm.membershipId = x.membershipId
+                vm.membershipType = x.membershipType
+              })
+            }else{
+              vm.message = 'There does not seem to be a player in the world of Destiny with the name <i>' + vm.displayName + '</i>, on either console. Make sure you enter a vaild gamertag (xbl or psn) or Bungie username.'
+              return
+            } 
+            
+            let response = yield getSummary(vm.membershipType, vm.membershipId)
 
-          vm.characterData = response.data.Response.data;
+            vm.characterData = response.data.Response.data;
 
-          let chars = vm.characterData.characters
+            let chars = vm.characterData.characters
 
-          /**
-           * TO-DO
-           * Extract the code below, to line 90 at least,
-           * to external file
-           */
-          let active = []
+            /**
+             * TO-DO
+             * Extract the code below, to line 90 at least,
+             * to external file
+             */
+            let active = []
 
-          // Find any active characters
-          for (let i = 0; i < chars.length; i++) {
-            if (chars[i].characterBase.currentActivityHash > 0) {
-              active.push(chars[i]);
-            };
-          }
+            // Find any active characters
+            for (let i = 0; i < chars.length; i++) {
+              if (chars[i].characterBase.currentActivityHash > 0) {
+                active.push(chars[i])
+              }
+            }
 
-          vm.activeCharacter = active[0]
+            if(active.length > 0) {
+              vm.activeCharacter = active[0]
 
-          if (vm.activeCharacter != '') {
-            // Will extract the following three maps to a single method later
-            let characterRace = []
-            characterRace.push(yield getRace(vm.activeCharacter.characterBase.raceHash))
-            characterRace.map((x)=>{
-              vm.characterRace = x.data.Response.data.race.raceName
-            })
+              // Will extract the following three maps to a single method later
+              let characterRace = []
+              characterRace.push(yield getRace(vm.activeCharacter.characterBase.raceHash))
+              characterRace.map((x)=>{
+                vm.characterRace = x.data.Response.data.race.raceName
+              })
 
-            let characterClass = []
-            characterClass.push(yield getClass(vm.activeCharacter.characterBase.classHash))
-            characterClass.map((x)=>{
-              vm.characterClass = x.data.Response.data.classDefinition.className
-            })
+              let characterClass = []
+              characterClass.push(yield getClass(vm.activeCharacter.characterBase.classHash))
+              characterClass.map((x)=>{
+                vm.characterClass = x.data.Response.data.classDefinition.className
+              })
 
-            let characterGender = []
-            characterGender.push(yield getGender(vm.activeCharacter.characterBase.genderHash))
-            characterGender.map((x)=>{
-              vm.characterGender = x.data.Response.data.gender.genderName
-            })    
+              let characterGender = []
+              characterGender.push(yield getGender(vm.activeCharacter.characterBase.genderHash))
+              characterGender.map((x)=>{
+                vm.characterGender = x.data.Response.data.gender.genderName
+              })    
 
-            //yield this.resolveActivity
-            let activity = vm.activeCharacter.characterBase.currentActivityHash
-            let act = yield getActivity(activity)
+              //yield this.resolveActivity
+              let activity = vm.activeCharacter.characterBase.currentActivityHash
+              let act = yield getActivity(activity)
 
-            vm.activity = act.data.Response.data.activity
+              vm.activity = act.data.Response.data.activity
 
-            yield this.fetchActivityCards(vm.activity.activityName)  
-          } else {
-            vm.message = 'None of your characters seem to be in an activity'
+              yield this.fetchActivityCards(vm.activity.activityName)
+              
+            } else {
+              vm.message = 'None of your characters seem to be in an activity'
           }
 
         } catch (err) {
@@ -143,7 +146,7 @@ new Vue({
           } 
         }             
       
-      },
+      }
 
     },
 
