@@ -15,48 +15,13 @@
         <link rel="icon" type="image/png" href="assets/images/favicon-128.png" sizes="128x128" />
     </head>
     <body>
-        <section class="hero is-medium is-primary is-bold">
-            <div class="hero-head">
-                <header id="app-header" class="nav">
-                    <div class="container">
-                        <div class="nav-left">
-                            <a href="index.html" class="nav-item">
-                                <h1 class="title">LoreBot Chrome Extension <small>v{{ getAppVersion }}</small></h1>
-                            </a>                         
-                        </div>
-                        <div class="nav-right">
-                            <div class="nav-item">
-                                <p>Bringing Destiny In-Game Lore to Your Browser</p>
-                            </div>
-                        </div>
-                    </div>           
-                </header>
-            </div>
-        </section>
+        <div id="app">
+            <!--header.vue-->
+        </div>
+        
 
         <section class="container" id="character">
-            <section class="level" id="inputs">
-                <div class="level-item">
-                    <label class="label" for="membershipType">Console Type: </label>
-                </div>
-                <div class="level-item">
-                    <select name="membershipType" id="membershipType" autofocus="true" v-model="membershipType" class="level-item">
-                        <option value=""></option>
-                        <option value="1">XBOX</option>
-                        <option value="2">PSN</option>
-                    </select>
-                </div>
-                <div class="level-item">
-                    <label for="displayName" class="label level-item">Gamertag: </label>
-                </div>
-                <div class="level-item">
-                    <input type="text" name="displayName" v-model="displayName" class="label level-item">
-                </div>
-                <div class="level-item">
-                    <button class="button level-item" v-on:click="{{ checkActivity() }}">Get Characters</button>
-                </div>
-            </section>
-
+            
             <!-- Active Character Display Area -->
             <section class="container outter" v-if="activeCharacter != ''">
                 <h1>Active Character Display</h1>

@@ -1,4 +1,9 @@
-'use strict'
+import Vue from 'vue'
+import LoreBot from './components/lorebot.vue'
 
-require('./components/header.js')
-require('./components/character.js')
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  template: '<LoreBot/>',
+  components: { LoreBot }
+})
