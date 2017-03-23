@@ -11,26 +11,40 @@
       <section class="column is-6 level">            
         <label for="displayName" class="label level-item">Gamertag: 
           <input type="text" name="displayName" v-model="displayName" class="level-item displayName">
-          <button class="button level-item has-text-centered" v-on:click="">Get Characters</button>
+          <button class="button level-item has-text-centered" @click="getDisplayName">Get Characters</button>
         </label>          
       </section>
     </header>
+    <p>{{ fetchGamer }}</p>
   </div>
 </section>
 </template>
 
 <script>
+import Store from '../store'
+
 export default {
   name: 'LoreBot',
+  Store,
   data () {
     return {
-
+      displayName: ''
+    }
+  },
+  methods: {
+    getDisplayName: function() {
+      let vm = this
+      let string = this.displayName
+      Store.commit('storeDisplayName', string)
     }
   },
   computed: {
     getAppVersion: function() {
       let pkg = require('../../package.json')
       return pkg.version
+    },
+    fetchGamer: function() {
+      return Store.getters.fetchGamer
     }
   }
 }
