@@ -1,3 +1,52 @@
+<template>
+<section class="section">
+  <div class="container">
+    <span class="title">Active Character</span>
+    <span class="subtitle">{{ fetchGamer }}</span>
+    <hr>
+    <div class="columns">
+      <div class="column">
+        <span>Character Emblem Stuff Here!</span>
+      </div>
+    </div>
+  </div>
+</section>
+</template>
+
+<script>
+import Store from '../store'
+import { searchDestinyPlayer, getIdByDisplayName, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
+const co = require('co')
+
+export default {
+  name: 'Character',
+  Store,
+  data () {
+    return {}
+  },
+  computed: {
+    fetchGamer: function() {
+      return Store.getters.fetchGamer
+    },
+    fetchCharacter: co.wrap(function *(){
+      if(fetchGamer){
+        console.log(fetchGamer)
+        return fetchGamer
+      }else{
+        console.log('Could not fetchGamer...')
+      }
+    })
+  },
+  methods: {
+    assembleCharacters: co.wrap(function *(){
+
+    })
+  }
+}
+</script>
+
+<style></style>
+
 'use strict'
 
 import Vue from 'vue'

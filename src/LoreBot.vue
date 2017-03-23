@@ -1,4 +1,5 @@
 <template>
+<div id="app">
 <section class="hero is-primary is-bold">
   <div class="space">
     <header class="columns is-vcentered">
@@ -15,13 +16,15 @@
         </label>          
       </section>
     </header>
-    <p>{{ fetchGamer }}</p>
   </div>
 </section>
+<Character></Character>
+</div>
 </template>
 
 <script>
-import Store from '../store'
+import Store from './store'
+import Character from './components/character.vue'
 
 export default {
   name: 'LoreBot',
@@ -34,19 +37,17 @@ export default {
   methods: {
     getDisplayName: function() {
       let vm = this
-      let string = this.displayName
+      let string = vm.displayName
       Store.commit('storeDisplayName', string)
     }
   },
   computed: {
     getAppVersion: function() {
-      let pkg = require('../../package.json')
+      let pkg = require('../package.json')
       return pkg.version
-    },
-    fetchGamer: function() {
-      return Store.getters.fetchGamer
     }
-  }
+  },
+  components: { Character }
 }
 </script>
 

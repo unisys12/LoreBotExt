@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import LoreBot from './components/lorebot.vue'
+import LoreBot from './lorebot.vue'
 
 /* eslint-disable no-new */
 new Vue({

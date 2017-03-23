@@ -15,22 +15,8 @@
         <link rel="icon" type="image/png" href="assets/images/favicon-128.png" sizes="128x128" />
     </head>
     <body>
-        <div id="app">
-            <!--header.vue-->
-        </div>
-        
-
-        <section class="container" id="character">
-            
-            <!-- Active Character Display Area -->
-            <section class="container outter" v-if="activeCharacter != ''">
-                <h1>Active Character Display</h1>
-                <hr>
-                <div class="columns badge">
-                    <div class="column emblem is-1" 
-                        :style="{ 'background': 'url(http://bungie.net' + activeCharacter.emblemPath + ') no-repeat' }">
-                    </div>
-                    <div class="column stats" 
+        <div id="app"></div>
+                    <!--<div class="column stats" 
                         :style="{ 'background': 'url(http://bungie.net' + activeCharacter.backgroundPath + ') no-repeat' }">
                         <div class="columns" >
                             <div class="column class">
@@ -52,11 +38,9 @@
                         </div>
                     </div>
                     </div>
-                </div>
+                </div>-->
                 
-                <!-- Current Activity Display Area -->
-                
-                <h1>Current Activity</h1>
+                <!--<h1>Current Activity</h1>
                 <hr>
                 <section if="activeCharacter != ''" class="columns activity">
                     <div class="column activityImage">
@@ -78,9 +62,9 @@
                 <article class="column notification is-info">
                     <p v-html="message"></p>
                 </article>
-            </section>
+            </section>-->
 
-            <!-- Grimoire Card Display Area -->
+            <!-- Grimoire Card Display Area
             <section class="section" v-show="grimoireCard">
                 <h1>Grimoire Cards</h1>
                 <hr>
@@ -92,11 +76,11 @@
                    </article>
                    <figure class="column image"><img :src="'https://bungie.net' + card.cardImage" alt="card-image"></figure>
                 </div>
-            </section>
+            </section>-->
             
-            <!-- Grimoire Categories Display Area -->
+            <!-- Grimoire Categories Display Area
             <section class="category-display" v-if="activity != ''">
-                <!--<pre>{{ grimoireCard.categories }}</pre>-->
+                <pre>{{ grimoireCard.categories }}</pre>
                 <div class="columns" v-for="category in grimoireCard.categories">
                     <section class="card column">
                         <div class="card-header">
@@ -111,10 +95,9 @@
                 </div>
             </section>
             <section class="category-display" v-else>
-                <!-- TO DO -->
                 <p>{{ categoryMessage }}</p>
             </section>        
-        </section>
+        </section>-->
         <footer class="footer">
             <div class="container">
                 <div class="content has-text-centered">
