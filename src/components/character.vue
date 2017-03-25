@@ -6,7 +6,7 @@
     <hr>
     <div class="columns">
       <div class="column">
-        
+        <pre>{{ this.fetchActiveCharacter }}</pre>
       </div>
     </div>
   </div>
@@ -54,7 +54,8 @@ export default {
         Store.commit('storeAccount', account)
       }else{
         // Display message that the account could not be found
-        this.characterMessage = 'Something went wrong, cannot store the account: ', account
+        this.characterMessage = `No valid BNet account can be found with the name - `
+         + obj + `. Make you are using a valid BNet account name and not a Twitch handle...`
         return
       }
     },
@@ -79,7 +80,7 @@ export default {
         }        
       }else{
         // Return message to display that no account was found
-        console.log('No gamertag entered or found...')
+        this.characterMessage = 'No characters found this account... ' + obj
         return
       }
     },
@@ -99,7 +100,8 @@ export default {
       let activeCharacter = this.fetchActiveCharacter
       if(activeCharacter.length < 1){
         // Send message to display that there are no active characters
-        this.characterMessage = 'There are currently no active characters on ' + obj + "'s account..."
+        let acct = this.fetchAccount
+        this.characterMessage = 'There are currently no active characters on ' + acct[0].displayName + "'s account..."
         return
       }else{
         let activity = await getActivity(activeCharacter.characterBase.currentActivityHash)
