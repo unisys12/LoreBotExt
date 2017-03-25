@@ -5,7 +5,7 @@
     <hr>
     <div class="columns">
       <div class="column">
-        <pre v-if="fetchGamer" :thisAccount="getActivity(fetchGamer)">{{  }}</pre>
+        <pre v-if="fetchGamer" :thisAccount="getActivity(fetchGamer)"></pre>
       </div>
     </div>
   </div>
@@ -14,8 +14,7 @@
 
 <script>
 import Store from '../store'
-import { searchDestinyPlayer, getIdByDisplayName, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
-const co = require('co')
+import { searchDestinyPlayer, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
 
 export default {
   name: 'Character',
@@ -40,8 +39,8 @@ export default {
     }
   },
   methods: {
-    getPlayer: co.wrap(function *(obj) {
-      let res = yield searchDestinyPlayer(obj)
+    getPlayer: async function(obj) {
+      let res = await searchDestinyPlayer(obj)
       let account = res.data.Response
       if(account.length > 0){
         Store.commit('storeAccount', account)
@@ -50,8 +49,8 @@ export default {
         console.log('Something went wrong, cannot store the account: ', account)
         return
       }
-    }),
-    getAccountSummary: co.wrap(function *(obj) {
+    },
+    getAccountSummary: async function(obj) {
       if(this.fetchGamer){
         // Find the player on BNet and store their info
         this.getPlayer(obj)
@@ -63,7 +62,7 @@ export default {
           Store.commit('storeMembershipId', x.membershipId)
           Store.commit('storeMembershipType', x.membershipType)
         })
-        let summary = yield getSummary(Store.state.membershipType, Store.state.membershipId)
+        let summary = await getSummary(Store.state.membershipType, Store.state.membershipId)
         if(summary.data.ErrorCode != 1){
           console.log('Error fetching Summary: ', summary)
           console.log(summary.data.ErrorStatus + ' :' + summary.data.Message)
@@ -75,11 +74,12 @@ export default {
         console.log('No gamertag entered or found...')
         return
       }
-    }),
+    },
     getActiveCharacter: async function(obj) {
       await this.getAccountSummary(obj)
       let characters = this.fetchSummary
       let chars = characters.data.Response.data.characters
+      // Not sure how well this will handle multiple active characters
       chars.map((x)=>{
         if(x.characterBase.currentActivityHash > 0) {
           Store.commit('storeActiveCharacters', x)
@@ -90,13 +90,11 @@ export default {
       await this.getActiveCharacter(obj)
       let activeCharacter = this.fetchActiveCharacter
       if(activeCharacter.length < 1){
-        // Send message to display 
+        // Send message to display that there are no active characters
         console.log('There are currently no active characters on ' + obj + "'s account...")
         return
       }else{
-        console.log('Found active character... fetching activity now...')
-        let activityHash = activeCharacter.characterBase.currentActivityHash
-        let activity = await getActivity(activityHash)
+        let activity = await getActivity(activeCharacter.characterBase.currentActivityHash)
         Store.commit('storeActivity', activity.data.Response.data.activity)
       }
     }
