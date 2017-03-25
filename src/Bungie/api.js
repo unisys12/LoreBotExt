@@ -11,7 +11,7 @@ const axios = Axios.create({
 
 // Hard coding `-1` for membershipType to search both PSN and XBL accounts for displayName
 function searchDestinyPlayer(displayName){
-    return axios('http://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/-1/' + displayName + '/')
+    return axios('https://www.bungie.net/Platform/Destiny/SearchDestinyPlayer/-1/' + displayName + '/')
 }
 
 function getIdByDisplayName(membershipType, displayName) {
@@ -19,26 +19,26 @@ function getIdByDisplayName(membershipType, displayName) {
 }
 
 function getSummary(membershipType, membershipId) {
-    return axios('http://www.bungie.net/Platform/Destiny/' + membershipType + '/Account/' + membershipId + '/Summary/')
+    return axios('https://www.bungie.net/Platform/Destiny/' + membershipType + '/Account/' + membershipId + '/Summary/')
 }
 
 function getRace(raceHash) {
-    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    return axios('https://www.bungie.net/Platform/Destiny/' + 
     '/Manifest/8/' + raceHash)
 }
 
 function getGender(genderHash) {
-    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    return axios('https://www.bungie.net/Platform/Destiny/' + 
     '/Manifest/4/' + genderHash)
 }
 
 function getClass(classHash) {
-    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    return axios('https://www.bungie.net/Platform/Destiny/' + 
     '/Manifest/3/' + classHash)
 }
 
 function getActivity(definitionId) {
-    return axios('http://www.bungie.net/Platform/Destiny/' + 
+    return axios('https://www.bungie.net/Platform/Destiny/' + 
     '/Manifest/1/' + 
     definitionId + '/')
 }
