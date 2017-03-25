@@ -1,15 +1,22 @@
 <template>
 <section class="section">
-  <div class="container">
+  <pre v-if="fetchGamer" :thisAccount="getActivity(fetchGamer)">{{ }}</pre>
+  <div class="container" v-if="this.fetchActiveCharacter.length > 0">
     <span class="title">Active Character</span>
     <hr>
     <div class="columns">
       <div class="column">
-        <pre v-if="fetchGamer" :thisAccount="getActivity(fetchGamer)"></pre>
+        
       </div>
     </div>
   </div>
+  <div class="container" v-else>
+    <div class="notification is-primary" v-show="characterMessage">
+      {{ characterMessage }}
+    </div>
+  </div>
 </section>
+
 </template>
 
 <script>
@@ -21,7 +28,8 @@ export default {
   Store,
   data () {
     return {
-      gamer: ''
+      gamer: '',
+      characterMessage: ''
     }
   },
   computed: {
@@ -46,7 +54,7 @@ export default {
         Store.commit('storeAccount', account)
       }else{
         // Display message that the account could not be found
-        console.log('Something went wrong, cannot store the account: ', account)
+        this.characterMessage = 'Something went wrong, cannot store the account: ', account
         return
       }
     },
@@ -65,7 +73,7 @@ export default {
         let summary = await getSummary(Store.state.membershipType, Store.state.membershipId)
         if(summary.data.ErrorCode != 1){
           console.log('Error fetching Summary: ', summary)
-          console.log(summary.data.ErrorStatus + ' :' + summary.data.Message)
+          this.characterMessage = summary.data.ErrorStatus + ' :' + summary.data.Message
         }else{
           Store.commit('storeSummary', summary)
         }        
@@ -91,7 +99,7 @@ export default {
       let activeCharacter = this.fetchActiveCharacter
       if(activeCharacter.length < 1){
         // Send message to display that there are no active characters
-        console.log('There are currently no active characters on ' + obj + "'s account...")
+        this.characterMessage = 'There are currently no active characters on ' + obj + "'s account..."
         return
       }else{
         let activity = await getActivity(activeCharacter.characterBase.currentActivityHash)
