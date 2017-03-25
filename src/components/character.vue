@@ -50,12 +50,19 @@ export default {
     getPlayer: async function(obj) {
       let res = await searchDestinyPlayer(obj)
       let account = res.data.Response
-      if(account.length > 0){
-        Store.commit('storeAccount', account)
+      console.log(account)
+
+      if(account){
+        if(account.length > 0){
+          Store.commit('storeAccount', account)
+        }else{
+          // Display message that the account could not be found
+          this.characterMessage = `No valid BNet account can be found with the name - `
+          + obj + `. Make you are using a valid BNet account name and not a Twitch handle...`
+          return
+        }
       }else{
-        // Display message that the account could not be found
-        this.characterMessage = `No valid BNet account can be found with the name - `
-         + obj + `. Make you are using a valid BNet account name and not a Twitch handle...`
+        this.characterMessage = 'Seemed to have lost our network connection...'
         return
       }
     },
