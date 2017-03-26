@@ -1,6 +1,6 @@
 <template>
 <section class="section" :thisAccount="getActivity(fetchGamer)">
-  <div class="container" v-if="activeCharacter != ''">
+  <div class="container is-fluid" v-if="activeCharacter != ''">
     <span class="title">Active Character</span>
     <hr>
     <div class="columns">
@@ -9,7 +9,7 @@
       </div>
       <div class="column stats" 
           :style="{ 'background': 'url(https://bungie.net' + activeCharacter.backgroundPath + ') no-repeat' }">
-        <div class="columns" >
+        <div class="columns">
             <div class="column class">
                 <p>{{ characterClass }}</p>
             </div>
@@ -39,7 +39,7 @@
                 <img :src="'https://www.bungie.net' + characterActivity.icon" alt="activityIcon">
             </figure>
           </div>
-          <div class="content">
+          <div class="column content">
             <h2>{{ characterActivity.activityName }}</h2>
             <h3>{{ characterActivity.activityDescription }}</h3>
           </div>

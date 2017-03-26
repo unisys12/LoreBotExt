@@ -2,37 +2,33 @@
 * {
   box-sizing: border-box; }
 
-#inputs {
-  padding-top: 1em; }
+.emblem {
+  z-index: 1; }
 
-.outter {
-  padding-top: 0;
-  padding-bottom: 2em;
-  padding-left: 0.75em; }
-  .outter .emblem {
-    z-index: 1; }
-  .outter .stats {
-    max-width: 474px;
-    color: white;
-    margin-left: -95px; }
-    .outter .stats .class {
-      margin-left: 90px; }
-    .outter .stats .blevel {
-      font-size: 150%;
-      margin-right: 4px; }
-    .outter .stats .race {
-      margin-left: 90px; }
-    .outter .stats .gender {
-      margin-left: 15px; }
+.stats {
+  max-width: 474px;
+  color: white;
+  font-size: 125%;
+  margin-left: -95px; }
+  .stats .class {
+    margin-left: 90px;
+    margin-top: -0.25em; }
+  .stats .blevel {
+    font-size: 175%;
+    margin-right: 4px;
+    margin-top: -0.5em; }
+  .stats .race {
+    margin-left: 90px; }
+  .stats .gender {
+    margin-left: 15px; }
 
 .activity {
-  padding: 2em 0;
-  margin-left: -1.5em; }
+  margin-top: -0.75em; }
+  .activity .activityBackground {
+    max-width: 75%; }
 
-.activityImage {
-  height: 240px; }
-  .activityImage .activityIcon {
-    margin-top: -95px; }
+.activityIcon {
+  margin-top: -95px; }
 
 .card-display {
   padding-top: 0 2em; }
