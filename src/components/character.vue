@@ -1,12 +1,30 @@
 <template>
-<section class="section">
-  <pre v-if="fetchGamer" :thisAccount="getActivity(fetchGamer)">{{ }}</pre>
-  <div class="container" v-if="this.fetchActiveCharacter.length > 0">
+<section class="section" :thisAccount="getActivity(fetchGamer)">
+  <div class="container" v-if="activeCharacter != ''">
     <span class="title">Active Character</span>
     <hr>
     <div class="columns">
-      <div class="column">
-        <pre>{{ this.fetchActiveCharacter }}</pre>
+      <div class="column stats"
+        :style="{ 'background': 'url(https://bungie.net' + activeCharacter.backgroundPath + ') no-repeat' }">
+        <div class="columns" >
+            <div class="column class">
+                <p>{{ characterClass }}</p>
+            </div>
+            <div class="column blevel is-1">
+                <p>{{ activeCharacter.characterLevel }}</p>
+            </div>
+        </div>
+        <div class="columns">
+          <div class="column race is-1">
+              <p>{{characterRace}}</p>
+          </div>
+          <div class="column gender">
+              <p>{{ characterGender}}</p>
+          </div>
+          <div class="column plevel is-1">
+              <p>{{ activeCharacter.characterBase.powerLevel }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -20,6 +38,7 @@
 </template>
 
 <script>
+const _ = require('underscore')
 import Store from '../store'
 import { searchDestinyPlayer, getSummary, getActivity, getClass, getGender, getRace } from '../Bungie/api.js'
 
@@ -29,7 +48,11 @@ export default {
   data () {
     return {
       gamer: '',
-      characterMessage: ''
+      characterMessage: '',
+      activeCharacter: '',
+      characterGender: '',
+      characterRace: '',
+      characterClass: '',
     }
   },
   computed: {
@@ -50,8 +73,6 @@ export default {
     getPlayer: async function(obj) {
       let res = await searchDestinyPlayer(obj)
       let account = res.data.Response
-      console.log(account)
-
       if(account){
         if(account.length > 0){
           Store.commit('storeAccount', account)
@@ -59,19 +80,17 @@ export default {
           // Display message that the account could not be found
           this.characterMessage = `No valid BNet account can be found with the name - `
           + obj + `. Make you are using a valid BNet account name and not a Twitch handle...`
-          return
         }
       }else{
         this.characterMessage = 'Seemed to have lost our network connection...'
-        return
       }
     },
     getAccountSummary: async function(obj) {
       if(this.fetchGamer){
         // Find the player on BNet and store their info
-        this.getPlayer(obj)
+        await this.getPlayer(obj)
         // Fetch that info from the Store and put into a var 
-        let account = this.fetchAccount
+        let account = await this.fetchAccount
         // Use map to extract the data we need for the next API call and 
         // place it in the Store for further use... later...
         account.map((x)=>{
@@ -91,30 +110,54 @@ export default {
         return
       }
     },
-    getActiveCharacter: async function(obj) {
-      await this.getAccountSummary(obj)
-      let characters = this.fetchSummary
-      let chars = characters.data.Response.data.characters
-      // Not sure how well this will handle multiple active characters
-      chars.map((x)=>{
-        if(x.characterBase.currentActivityHash > 0) {
-          Store.commit('storeActiveCharacters', x)
+    getActiveCharacter: _.debounce(async function(obj) {
+      if(this.fetchGamer){
+        await this.getAccountSummary(obj)
+        let characters = await this.fetchSummary
+        let chars = characters.data.Response.data.characters
+        // Not sure how well this will handle multiple active characters
+        chars.map((x)=>{
+          if(x.characterBase.currentActivityHash > 0) {
+            Store.commit('storeActiveCharacters', x)
+          }
+        })
+        this.activeCharacter = this.fetchActiveCharacter
+        if(this.activeCharacter.length > 0){
+          let characterRace = []
+          characterRace.push(await getRace(this.activeCharacter.characterBase.raceHash))
+          characterRace.map((x)=>{
+            this.characterRace = x.data.Response.data.race.raceName
+          })
+
+          let characterClass = []
+          characterClass.push(await getClass(this.activeCharacter.characterBase.classHash))
+          characterClass.map((x)=>{
+            this.characterClass = x.data.Response.data.classDefinition.className
+          })
+
+          let characterGender = []
+          characterGender.push(await getGender(this.activeCharacter.characterBase.genderHash))
+          characterGender.map((x)=>{
+            this.characterGender = x.data.Response.data.gender.genderName
+          })
+        }else{
+          this.characterMessage = 'There are no active characters on ' + this.fetchGamer + "'s account at the moment..."
         }
-      })
-    },
-    getActivity: async function(obj) {
-      await this.getActiveCharacter(obj)
-      let activeCharacter = this.fetchActiveCharacter
-      if(activeCharacter.length < 1){
-        // Send message to display that there are no active characters
-        let acct = this.fetchAccount
-        this.characterMessage = 'There are currently no active characters on ' + acct[0].displayName + "'s account..."
-        return
-      }else{
-        let activity = await getActivity(activeCharacter.characterBase.currentActivityHash)
-        Store.commit('storeActivity', activity.data.Response.data.activity)
       }
-    }
+    }, 1000, true),
+    getActivity: async function(obj) {
+      let gamertag = this.fetchGamer
+      if(gamertag.length > 0){
+        await this.getActiveCharacter(obj)
+        if(this.activeCharacter != ''){
+          let activity = await getActivity(this.activeCharacter.characterBase.currentActivityHash)
+          Store.commit('storeActivity', activity.data.Response.data.activity)
+          console.log('Currect Activity: ', Store.getters.fetchActivity)
+        }
+      }else{
+        this.characterMessage = 'Please enter a valid Bungie.net Username or gamertag to get started...'
+      }      
+    },
   }
 }
 </script>
