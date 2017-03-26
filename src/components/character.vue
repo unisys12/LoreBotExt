@@ -4,8 +4,11 @@
     <span class="title">Active Character</span>
     <hr>
     <div class="columns">
-      <div class="column stats"
-        :style="{ 'background': 'url(https://bungie.net' + activeCharacter.backgroundPath + ') no-repeat' }">
+      <div class="column emblem is-1" 
+          :style="{ 'background': 'url(https://bungie.net' + activeCharacter.emblemPath + ') no-repeat' }">
+      </div>
+      <div class="column stats" 
+          :style="{ 'background': 'url(https://bungie.net' + activeCharacter.backgroundPath + ') no-repeat' }">
         <div class="columns" >
             <div class="column class">
                 <p>{{ characterClass }}</p>
