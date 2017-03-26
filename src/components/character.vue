@@ -29,6 +29,22 @@
           </div>
         </div>
       </div>
+      <div class="column">
+        <section if="activeCharacter != ''" class="activity">
+          <div class="activityImage">
+            <figure class="activityBackground">
+                <img :src="'https://www.bungie.net' + characterActivity.pgcrImage" alt="activityBackground">
+            </figure>
+            <figure class="activityIcon">
+                <img :src="'https://www.bungie.net' + characterActivity.icon" alt="activityIcon">
+            </figure>
+          </div>
+          <div class="content">
+            <h2>{{ characterActivity.activityName }}</h2>
+            <h3>{{ characterActivity.activityDescription }}</h3>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
   <div class="container" v-else>
@@ -56,6 +72,7 @@ export default {
       characterGender: '',
       characterRace: '',
       characterClass: '',
+      characterActivity: ''
     }
   },
   computed: {
@@ -124,8 +141,8 @@ export default {
             Store.commit('storeActiveCharacters', x)
           }
         })
-        this.activeCharacter = this.fetchActiveCharacter
-        if(this.activeCharacter.length > 0){
+        this.activeCharacter = await this.fetchActiveCharacter
+        if(this.activeCharacter != ''){
           let characterRace = []
           characterRace.push(await getRace(this.activeCharacter.characterBase.raceHash))
           characterRace.map((x)=>{
@@ -155,7 +172,7 @@ export default {
         if(this.activeCharacter != ''){
           let activity = await getActivity(this.activeCharacter.characterBase.currentActivityHash)
           Store.commit('storeActivity', activity.data.Response.data.activity)
-          console.log('Currect Activity: ', Store.getters.fetchActivity)
+          this.characterActivity = Store.getters.fetchActivity
         }
       }else{
         this.characterMessage = 'Please enter a valid Bungie.net Username or gamertag to get started...'
@@ -165,7 +182,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+
+</style>
 
 // 'use strict'
 

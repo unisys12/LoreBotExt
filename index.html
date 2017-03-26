@@ -20,20 +20,6 @@
                 
                 <!--<h1>Current Activity</h1>
                 <hr>
-                <section if="activeCharacter != ''" class="columns activity">
-                    <div class="column activityImage">
-                        <figure class="activityBackground">
-                            <img :src="'http://www.bungie.net' + activity.pgcrImage" alt="activityBackground">
-                        </figure>
-                        <figure class="activityIcon">
-                            <img :src="'http://www.bungie.net' + activity.icon" alt="activityIcon">
-                        </figure>
-                    </div>
-                    <div class="column content">
-                        <h2>{{ activity.activityName }}</h2>
-                        <h3>{{ activity.activityDescription }}</h3>
-                    </div>
-                </section>
             </section>
             
             <section class="columns" v-else>
