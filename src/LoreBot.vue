@@ -19,12 +19,14 @@
   </div>
 </section>
 <Character></Character>
+<Grimoire></Grimoire>
 </div>
 </template>
 
 <script>
 import Store from './store'
 import Character from './components/character.vue'
+import Grimoire from './components/grimoire.vue'
 
 export default {
   name: 'LoreBot',
@@ -47,7 +49,7 @@ export default {
       return pkg.version
     }
   },
-  components: { Character }
+  components: { Character, Grimoire }
 }
 </script>
 
