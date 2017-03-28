@@ -1,16 +1,29 @@
 <template>
-<section class="section" :theGrimoire="getGrimoire()">
-  <div class="container is-fluid" v-show="activity">
+<section class="section" :getActive="getGrimoire()">
+  <div class="container is-fluid" v-if="activity != ''">
     <span class="title">Grimoire</span>
     <hr>
-    <div class="columns">
-      <pre>{{ activity }}</pre>
+    <div class="columns" v-for="card in grimoireCard">
+        <article class="column is-three-quarters content">
+            <h2>{{ card._id }}</h2>
+            <h4 v-html="card.cardIntro"></h4>
+            <p v-html="card.cardDescription"></p>
+        </article>
+        <figure class="column"><img :src="'https://bungie.net' + card.cardImage" alt="card-image"></figure>
     </div>
+  </div>
+  <div class="container" v-else>
+    <span class="title">Grimoire</span>
+    <hr>
+    <article class="notification is-primary">
+      {{ grimoireMessage }}
+    </article>
   </div>
 </section>
 </template>
 
 <script>
+const _ = require('underscore')
 import Store from '../store'
 import grimoireDefinitions from '../Bungie/grimoireDefs'
 
@@ -20,17 +33,39 @@ export default {
   data () {
     return {
       grimoireMessage: '',
-      activity: ''
+      activity: '',
+      activityName: '',
+      activityDescription: '',
+      destinationHash: '',
+      placeHash: '',
+      activityTypeHash: '',
+      grimoireCard: ''
     }
   },
   methods: {
-    getGrimoire: async function(activity) {
-      console.log('Currect Activity: ', this.fetchAcivity)
-    }
+    getGrimoire: _.throttle(async function() {
+      if(this.fetchCharacter.length == 0){
+        this.grimoireMessage = 'There is no current activity...'
+        return
+      }else{
+        this.activity = await Store.getters.fetchActivity
+        console.log('Activity name: ', this.activity.activityName)
+        try {
+          let cards = await grimoireDefinitions.fetchCards(this.activity.activityName)
+          console.log('Activity cards: ', cards)
+          // Store grimoire card data
+          if(cards){
+            this.grimoireCard = cards
+          }
+        } catch (error) {
+          console.log('There was an error fetching grimoire cards: ', error)
+        }
+      }
+    }, 10000)
   },
   computed: {
-    fetchAcivity: function() {
-      return Store.getters.fetchActivity
+    fetchCharacter: function() {
+      return Store.getters.fetchActive
     }
   }
 }
