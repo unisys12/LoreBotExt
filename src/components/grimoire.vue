@@ -49,12 +49,11 @@ export default {
         return
       }else{
         this.activity = await Store.getters.fetchActivity
-        console.log('Activity name: ', this.activity.activityName)
         try {
           let cards = await grimoireDefinitions.fetchCards(this.activity.activityName)
-          console.log('Activity cards: ', cards)
           // Store grimoire card data
           if(cards){
+            Store.commit('storeGrimoire', cards)
             this.grimoireCard = cards
           }
         } catch (error) {
