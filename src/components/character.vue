@@ -130,7 +130,7 @@ export default {
         return
       }
     },
-    getActiveCharacter: _.debounce(async function(obj) {
+    getActiveCharacter: async function(obj) {
       if(this.fetchGamer){
         await this.getAccountSummary(obj)
         let characters = await this.fetchSummary
@@ -164,8 +164,8 @@ export default {
           this.characterMessage = 'There are no active characters on ' + this.fetchGamer + "'s account at the moment..."
         }
       }
-    }, 1000, true),
-    getActivity: async function(obj) {
+    },
+    getActivity: _.throttle(async function(obj) {
       let gamertag = this.fetchGamer
       if(gamertag.length > 0){
         await this.getActiveCharacter(obj)
@@ -177,7 +177,7 @@ export default {
       }else{
         this.characterMessage = 'Please enter a valid Bungie.net Username or gamertag to get started...'
       }      
-    },
+    }, 10000)
   }
 }
 </script>
