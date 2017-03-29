@@ -63,7 +63,6 @@ let grimoireDefinitions = (()=>{
     })
 
     return {
-        // Public Methods
         fetchCards: fetchCards
     }
 

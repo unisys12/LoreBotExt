@@ -57,7 +57,7 @@ export default {
             this.grimoireCard = cards
           }
         } catch (error) {
-          console.log('There was an error fetching grimoire cards: ', error)
+          this.grimoireMessage = 'There was an error fetching grimoire cards: ' +  error
         }
       }
     }, 10000)

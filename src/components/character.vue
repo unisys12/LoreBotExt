@@ -119,8 +119,7 @@ export default {
         })
         let summary = await getSummary(Store.state.membershipType, Store.state.membershipId)
         if(summary.data.ErrorCode != 1){
-          console.log('Error fetching Summary: ', summary)
-          this.characterMessage = summary.data.ErrorStatus + ' :' + summary.data.Message
+          this.characterMessage = 'Error fetching Summary: ' + summary.data.ErrorStatus + ' :' + summary.data.Message
         }else{
           Store.commit('storeSummary', summary)
         }        
