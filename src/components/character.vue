@@ -1,6 +1,6 @@
 <template>
 <section class="section" :thisAccount="getActivity(fetchGamer)">
-  <div class="container is-fluid" v-if="activeCharacter != ''">
+  <div class="container" v-if="activeCharacter != ''">
     <span class="title">Active Character</span>
     <hr>
     <div class="columns">
