@@ -1,8 +1,10 @@
 {
-  "name": "LoreBot Extension",
-  "version": "0.2.7",
+  "name": "LoreBot",
+  "short_name": "LoreBot",
+  "version": "0.2.8",
+  "author": "Phillip Jackson: unisys12@gmail.com",
   "manifest_version": 2,
-  "description": "Display Grimoire in the browser while playing Destiny the Game",
+  "description": "Display Grimoire and other related information in the browser while playing Destiny the Game",
   "icons": {
     "16": "assets/images/favicon-16.png",
     "128": "assets/images/favicon-128.png"
