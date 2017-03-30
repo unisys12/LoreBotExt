@@ -1,10 +1,9 @@
 <template>
 <section class="category-display" :getCategories="getCategories()">
-  <div class="container is-fluid" v-if="grimoireCard != ''">
+  <div class="container is-fluid" v-if="categories != ''">
     <span class="title">Grimoire Categories</span>
     <hr>
-  <pre>{{ grimoireCard }}</pre>
-    <div class="columns" v-for="category in grimoireCard">
+    <div class="columns" v-for="category in categories">
       <section class="card column">
         <div class="card-header">
           <p class="header-title">{{ category.name }}</p>
@@ -25,12 +24,12 @@
     </article>
   </div>
 </section>
-
 </template>
 
 <script>
 import Ishtar from '../Ishtar/api'
 import Store from '../store'
+const _ = require('underscore')
 
 export default {
   name: 'Categories',
@@ -44,27 +43,38 @@ export default {
   },
   Store,
   methods: {
-    getCategories: async function(cards) {
+    getCategories: _.throttle(async function(cards) {
       let categories = []
       let card = []
+      let vm = this
       this.grimoireCard = Store.getters.fetchCards
       
       if(this.grimoireCard != ''){
-        this.grimoireCard.map(async function(x) {
-          card.push(await Ishtar.getCards(x._id.toLowerCase().replace(' ', '-')))
+        this.grimoireCard.map(async function(x) {          
+          let cardName = Ishtar.processSlug(x._id)          
+          let instance = await Ishtar.getCards(cardName)          
+          console.log('Instance: ', instance)
+          if(instance.status != 200 || instance.data.grimoire_card.categories.length == 0){
+            vm.categoryMessage = 'There does not seem to be any categories for this activity...'
+          }else{
+            card.push(instance)
+            if(card.length > 0){
+              card.map((x)=>{
+                console.log('mapping cats to data w/: ', x.data.grimoire_card.categories)
+                vm.categories = x.data.grimoire_card.categories
+              })
+            }
+            //vm.categories = instance.data.grimoire_card.categories
+            console.log(vm.categories)
+          }          
+        
         })
-      }
-      
-      if(card.length > 0) {
-        card.map((x)=>{
-          this.categories = x.data.grimoire_card.categories
-        })
+      }else{
+        vm.categoryMessage = 'Since there is no activity, at the moment, we cannot display categories...'
       }
 
-      if(this.categories == ''){
-        this.categoryMessage = 'There does not seem to be any categories for this activity...'
-      }
-    }
+      
+    }, 10000)
   }
 }
 </script>
