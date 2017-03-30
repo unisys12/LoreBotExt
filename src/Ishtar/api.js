@@ -9,6 +9,13 @@ let Ishtar = (()=> {
         
         getItems: (string)=> {
             return Axios('http://api.ishtar-collective.net/items/' + string)
+        },
+
+        processSlug: (string)=>{
+            return string
+            .replace(':', '')
+            .replace(/[^a-zA-Z0-9]/g, '-')
+            .toLowerCase()
         }
     }
 
