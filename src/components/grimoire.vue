@@ -1,6 +1,6 @@
 <template>
 <section class="section" :getActive="getGrimoire()">
-  <div class="container is-fluid" v-if="activity != ''">
+  <div class="container" v-if="activity != ''">
     <span class="title">Grimoire</span>
     <hr>
     <div class="columns" v-for="card in grimoireCard">
@@ -52,12 +52,14 @@ export default {
         try {
           let cards = await grimoireDefinitions.fetchCards(this.activity.activityName)
           // Store grimoire card data
-          if(cards){
+          if(cards.length > 0){
             Store.commit('storeGrimoire', cards)
             this.grimoireCard = cards
+          }else{
+            this.grimoireMessage = "Cannot seem to find any Grimoire related to this activity..."
           }
         } catch (error) {
-          this.grimoireMessage = 'There was an error fetching grimoire cards: ' +  error
+          this.grimoireMessage = 'Fetching Grimoire related to current activity...'
         }
       }
     }, 10000)
