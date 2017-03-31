@@ -46,7 +46,6 @@ export default {
     getGrimoire: _.throttle(async function() {
       if(this.fetchCharacter.length == 0){
         this.grimoireMessage = 'There is no current activity...'
-        return
       }else{
         this.activity = await Store.getters.fetchActivity
         try {
@@ -62,7 +61,7 @@ export default {
           this.grimoireMessage = 'Fetching Grimoire related to current activity...'
         }
       }
-    }, 10000)
+    }, 5000)
   },
   computed: {
     fetchCharacter: function() {

@@ -125,8 +125,7 @@ export default {
         }        
       }else{
         // Return message to display that no account was found
-        this.characterMessage = 'No characters found this account... ' + obj
-        return
+        this.characterMessage = 'No characters found using this account... ' + obj
       }
     },
     getActiveCharacter: async function(obj) {
@@ -176,7 +175,7 @@ export default {
       }else{
         this.characterMessage = 'Please enter a valid Bungie.net Username or gamertag to get started...'
       }      
-    }, 10000)
+    }, 3000)
   }
 }
 </script>

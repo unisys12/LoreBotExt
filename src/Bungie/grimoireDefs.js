@@ -23,9 +23,7 @@ let grimoireDefinitions = (()=>{
                     "cardImage": x.highResolution.image.sheetPath
                 })
             })
-
-            return defObj
-
+            return defObj            
         }else{
             return dbres
         }
@@ -39,8 +37,7 @@ let grimoireDefinitions = (()=>{
         if(data){
             await defs.insert(data)
         }else{
-            console.log('There was an error inserting docs...')
-            return 
+            console.log('There was an error inserting docs...') 
         }           
 
     }
