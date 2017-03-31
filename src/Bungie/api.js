@@ -15,7 +15,7 @@ function searchDestinyPlayer(displayName){
 }
 
 function getIdByDisplayName(membershipType, displayName) {
-    return axios('http://www.bungie.net/Platform/Destiny/' + membershipType + '/Stats/GetMembershipIdByDisplayName/' + displayName)
+    return axios('http://www.bungie.net/Platform/Destiny/' + membershipType + '/Stats/GetMembershipIdByDisplayName/' + displayName + '/')
 }
 
 function getSummary(membershipType, membershipId) {
@@ -24,17 +24,17 @@ function getSummary(membershipType, membershipId) {
 
 function getRace(raceHash) {
     return axios('https://www.bungie.net/Platform/Destiny/' + 
-    'Manifest/8/' + raceHash)
+    'Manifest/8/' + raceHash + '/')
 }
 
 function getGender(genderHash) {
     return axios('https://www.bungie.net/Platform/Destiny/' + 
-    'Manifest/4/' + genderHash)
+    'Manifest/4/' + genderHash + '/')
 }
 
 function getClass(classHash) {
     return axios('https://www.bungie.net/Platform/Destiny/' + 
-    'Manifest/3/' + classHash)
+    'Manifest/3/' + classHash + '/')
 }
 
 function getActivity(definitionId) {
