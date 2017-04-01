@@ -1,21 +1,22 @@
 <template>
-<section class="category-display" :getCategories="getCategories()">
-  <div class="container is-fluid" v-if="categories != ''">
+<section class="section" :getCategories="getCategories()">
+  <div v-if="categories != ''">
     <span class="title">Grimoire Categories</span>
     <hr>
-    <div class="columns" v-for="category in categories">
-      <section class="card column">
-        <div class="card-header">
-          <p class="header-title">{{ category.name }}</p>
+    <div class="columns">
+      <div class="card column" v-for="category in categories">
+      <span class="title">
+        {{ category.name }}
+      </span>
+      <article class="content" :details="getDetails(category.api_url)">
+        <a :href="category.ishtar_url" target="_blank">More Info on {{ category.name }}</a>
+        <div v-show="details">
+          <pre>{{ details }}</pre>
         </div>
-        <article class="card-content">
-          <section class="content">
-            <a :href="category.ishtar_url" target="_blank">More Info on {{ category.name }}</a>
-          </section>
-        </article>
-      </section>
+      </article>
     </div>
-  </div>  
+    </div>
+  </div>
   <div class="container" v-else>
     <span class="title">Grimoire Categories</span>
     <hr>
@@ -52,29 +53,23 @@ export default {
       if(this.grimoireCard != ''){
         this.grimoireCard.map(async function(x) {          
           let cardName = Ishtar.processSlug(x._id)          
-          let instance = await Ishtar.getCards(cardName)          
-          console.log('Instance: ', instance)
+          let instance = await Ishtar.getCards(cardName)
           if(instance.status != 200 || instance.data.grimoire_card.categories.length == 0){
             vm.categoryMessage = 'There does not seem to be any categories for this activity...'
           }else{
             card.push(instance)
             if(card.length > 0){
               card.map((x)=>{
-                console.log('mapping cats to data w/: ', x.data.grimoire_card.categories)
                 vm.categories = x.data.grimoire_card.categories
               })
             }
-            //vm.categories = instance.data.grimoire_card.categories
-            console.log(vm.categories)
           }          
         
         })
       }else{
         vm.categoryMessage = 'Since there is no activity, at the moment, we cannot display categories...'
-      }
-
-      
-    }, 10000)
+      }      
+    }, 5000)
   }
 }
 </script>
