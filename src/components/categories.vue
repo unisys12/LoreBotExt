@@ -63,8 +63,7 @@ export default {
                 vm.categories = x.data.grimoire_card.categories
               })
             }
-          }          
-        
+          }
         })
       }else{
         vm.categoryMessage = 'Since there is no activity, at the moment, we cannot display categories...'
