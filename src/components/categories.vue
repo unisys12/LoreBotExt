@@ -8,11 +8,11 @@
       <span class="title">
         {{ category.name }}
       </span>
-      <article class="content" :details="getDetails(category.api_url)">
+      <article class="content">
         <a :href="category.ishtar_url" target="_blank">More Info on {{ category.name }}</a>
-        <div v-show="details">
+        <!--<div v-show="details">
           <pre>{{ details }}</pre>
-        </div>
+        </div>-->
       </article>
     </div>
     </div>

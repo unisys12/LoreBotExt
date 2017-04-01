@@ -47,8 +47,8 @@ export default {
       if(this.fetchCharacter.length == 0){
         this.grimoireMessage = 'There is no current activity...'
       }else{
-        this.activity = await Store.getters.fetchActivity
         try {
+          this.activity = await Store.getters.fetchActivity
           let cards = await grimoireDefinitions.fetchCards(this.activity.activityName)
           // Store grimoire card data
           if(cards.length > 0){

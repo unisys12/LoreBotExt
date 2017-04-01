@@ -175,7 +175,7 @@ export default {
       }else{
         this.characterMessage = 'Please enter a valid Bungie.net Username or gamertag to get started...'
       }      
-    }, 3000)
+    }, 10000)
   }
 }
 </script>

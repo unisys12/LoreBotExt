@@ -9,9 +9,17 @@ let grimoireDefinitions = (()=>{
 
     async function fetchDB() {
 
-        let dbres = await DestinyQueries.grimoireDefinition()
+        let dbres
 
-        if (dbres.status === 200) {
+        try {
+            dbres = await DestinyQueries.grimoireDefinition()
+        } catch (error) {
+            return error
+        }
+
+        if (!dbres) {
+            return
+        }else{
             let dbresData = dbres.data
             let defObj = []
 
@@ -23,9 +31,7 @@ let grimoireDefinitions = (()=>{
                     "cardImage": x.highResolution.image.sheetPath
                 })
             })
-            return defObj            
-        }else{
-            return dbres
+            return defObj
         }
 
     }
@@ -35,14 +41,18 @@ let grimoireDefinitions = (()=>{
         let data = await fetchDB()
 
         if(data){
-            await defs.insert(data)
+            try {
+                await defs.insert(data)
+            } catch (error) {
+                return error
+            }
         }else{
             console.log('There was an error inserting docs...') 
         }           
 
     }
 
-    let fetchCards = co.wrap(function *(string){
+    let fetchCards = async function(string){
 
         let collData = defs.data
 
@@ -54,10 +64,14 @@ let grimoireDefinitions = (()=>{
             })
             return results
         }else{
-            yield insertGrimoire()        
+             try {
+                 await insertGrimoire()
+             } catch (error) {
+                 console.log('Error inserting Database: ', error)
+             }        
         }
 
-    })
+    }
 
     return {
         fetchCards: fetchCards
