@@ -52,7 +52,7 @@ export default {
       
       if(this.grimoireCard != ''){
         this.grimoireCard.map(async function(x) {          
-          let cardName = Ishtar.processSlug(x._id)          
+          let cardName = Ishtar.processSlug(x._id)       
           let instance = await Ishtar.getCards(cardName)
           if(instance.status != 200 || instance.data.grimoire_card.categories.length == 0){
             vm.categoryMessage = 'There does not seem to be any categories for this activity...'
@@ -66,7 +66,7 @@ export default {
           }
         })
       }else{
-        vm.categoryMessage = 'Since there is no activity, at the moment, we cannot display categories...'
+        vm.categoryMessage = 'Enter an activity to check for categories...'
       }      
     }, 5000)
   }
