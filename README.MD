@@ -20,3 +20,6 @@ After this is displayed, give the extension a few seconds to download and insert
 ![Displaying Grimoire Cards](https://drive.google.com/uc?export=view&id=0B-kKCIm8tW4gR1NPTVJNck1pTFE)
 
 Around the sametime as this, you will be able to see if there are any further references to this activity by checking the Categories section at the bottom. There you will find very simple boxes, housing links to Ishtar-Collective.Net covering each of the categories listed. If no categories are assocated with the cards or activity, then you will see a message saying so. Remember, the categories section is a curated list that is put together by hard working members of the Destiny Lore community and not pulled from the Bungie API.
+
+###Known Issues
+- Sometimes Grimoire Cards are displayed twice. This is something that I am currently investigating. 
