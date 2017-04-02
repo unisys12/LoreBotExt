@@ -7,6 +7,10 @@ const defs = db.addCollection('grimoireDefinitions')
 
 let grimoireDefinitions = (()=>{
 
+    function processString(string) {
+        return string.replace("'", "&#39;")
+    }
+
     async function fetchDB() {
 
         let dbres
@@ -59,7 +63,7 @@ let grimoireDefinitions = (()=>{
         if(collData.length > 0){            
             let results = defs.find({
                 '_id': {
-                    '$regex': string
+                    '$regex': processString(string)
                 }
             })
             return results

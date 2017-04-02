@@ -1,11 +1,11 @@
 <template>
 <section class="section" :getActive="getGrimoire()">
-  <div class="container" v-if="activity != ''">
+  <div class="container" v-if="grimoireCard != ''">
     <span class="title">Grimoire</span>
     <hr>
     <div class="columns" v-for="card in grimoireCard">
         <article class="column is-three-quarters content">
-            <h2>{{ card._id }}</h2>
+            <h2 v-html="card._id"></h2>
             <h4 v-html="card.cardIntro"></h4>
             <p v-html="card.cardDescription"></p>
         </article>
@@ -61,7 +61,7 @@ export default {
           this.grimoireMessage = 'Fetching Grimoire related to current activity...'
         }
       }
-    }, 5000)
+    }, 7000)
   },
   computed: {
     fetchCharacter: function() {
