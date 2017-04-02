@@ -61,7 +61,7 @@ export default {
           this.grimoireMessage = 'Fetching Grimoire related to current activity...'
         }
       }
-    }, 7000)
+    }, 5000)
   },
   computed: {
     fetchCharacter: function() {
