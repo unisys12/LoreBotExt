@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+* {
+  box-sizing: border-box; }
+
+.emblem {
+  z-index: 1; }
+
+.stats {
+  max-width: 474px;
+  color: white;
+  font-size: 125%;
+  margin-left: -95px; }
+  .stats .class {
+    margin-left: 90px;
+    margin-top: -0.25em; }
+  .stats .blevel {
+    font-size: 175%;
+    margin-right: 0.5em;
+    margin-top: -0.5em; }
+  .stats .plevel {
+    margin-right: 0.5em; }
+  .stats .race {
+    margin-left: 90px; }
+  .stats .gender {
+    margin-left: 2em; }
+
+.activity {
+  margin-top: -0.75em; }
+  .activity .activityBackground {
+    max-width: 100%; }
+
+.activityIcon {
+  margin-top: -7em; }
+
+.card-display {
+  padding-top: 0 2em; }
+
+/*# sourceMappingURL=style.css.map */

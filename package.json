@@ -1,32 +1,44 @@
 {
   "name": "lorebotext",
-  "version": "0.0.3",
+  "version": "0.2.12",
   "description": "Deliver in-game lore to players of Destiny through a chrome extension",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha test --recursive",
-    "dev": "mocha test --recursive --watch",
-    "dev-build": "browserify src/core.js -t babelify --outfile src/index.js"
+
+    "dev": "webpack --config webpack.config.js --watch",
+    "style": "sass --watch src/styles/style.sass:assets/css/style.css"
   },
   "repository": "https://github.com/unisys12/LoreBotExt.git",
   "author": "Phillip Jackson <unisys12@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
-    "babel-cli": "^6.18.0",
     "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.22.0",
     "babel-preset-env": "^1.1.8",
-    "babel-watch": "^2.0.5",
-    "babelify": "^7.3.0",
-    "browserify": "^14.0.0",
     "chai": "^3.5.0",
+    "css-loader": "^0.27.3",
     "dotenv": "^4.0.0",
     "eslint": "^3.13.1",
+    "extract-text-webpack-plugin": "^2.1.0",
     "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "vue-loader": "^11.2.0",
+    "vue-template-compiler": "^2.2.4",
+    "webpack": "^2.2.1"
   },
   "dependencies": {
-    "mongoose": "^4.7.7"
+    "axios": "^0.15.3",
+    "co": "^4.6.0",
+    "lokijs": "^1.4.3",
+    "underscore": "^1.8.3",
+    "vue": "^2.2.4",
+    "vuex": "^2.2.1"
+  },
+  "browser": {
+    "vue": "./node_modules/vue/dist/vue.common"
   },
   "eslintConfig": {
     "env": {
