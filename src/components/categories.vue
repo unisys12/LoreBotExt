@@ -68,7 +68,7 @@ export default {
       }else{
         vm.categoryMessage = 'Enter an activity to check for categories...'
       }      
-    }, 5000)
+    }, 5000, true)
   }
 }
 </script>
