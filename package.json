@@ -1,12 +1,12 @@
 {
   "name": "lorebotext",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "Deliver in-game lore to players of Destiny through a chrome extension",
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha test --recursive",
     "dev": "webpack --config webpack.config.js --watch",
-    "prod": "set NODE_ENV=production&& webpack --config webpack.prod.config.js",
+    "prod": "webpack -p",
     "style": "sass --watch src/styles/style.sass:assets/css/style.css"
   },
   "repository": "https://github.com/unisys12/LoreBotExt.git",
