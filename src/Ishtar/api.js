@@ -18,9 +18,12 @@ let Ishtar = (()=> {
         processSlug: (string)=>{
             return string
             .replace(':', '')
-            .replace(/['&#39;']/g, "")
+            .replace('-', '')
+            .replace(',', '')
+            .replace('&#39;', "")
             .replace(/[^a-zA-Z0-9]/g, '-')
-            .toLowerCase()
+            .replace('--', '-')
+            .toLowerCase()            
         }
     }
 
