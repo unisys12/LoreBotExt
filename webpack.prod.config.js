@@ -9,7 +9,7 @@ module.exports = {
         filename: 'index.js',
         path: './dist/'
     },
-    devtool: 'source-map',
+    devtool: 'nosources-source-map',
     module: {
         loaders:[
         {

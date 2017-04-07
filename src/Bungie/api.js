@@ -1,11 +1,9 @@
-'use strict'
-
 const Axios = require('axios')
 
 // Confire Axios
 const axios = Axios.create({
     headers: {
-        'X-API-KEY': '7ced29b9f06844efb9102fbf73218362'
+        'X-API-KEY': process.env.X_API_KEY
     }
 })
 
