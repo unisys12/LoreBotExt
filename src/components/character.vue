@@ -133,12 +133,16 @@ export default {
         await this.getAccountSummary(obj)
         let characters = await this.fetchSummary
         let chars = characters.data.Response.data.characters
-        // Not sure how well this will handle multiple active characters
-        chars.map((x)=>{
-          if(x.characterBase.currentActivityHash > 0) {
-            Store.commit('storeActiveCharacters', x)
+        let active = []
+        
+        for (let i = 0; i < chars.length; i++) {
+          if (chars[i].characterBase.currentActivityHash > 0) {
+            active.push(chars[i])
           }
-        })
+        }
+
+        Store.commit('storeActiveCharacters', active[0])
+
         this.activeCharacter = await this.fetchActiveCharacter
         if(this.activeCharacter != ''){
           let characterRace = []
