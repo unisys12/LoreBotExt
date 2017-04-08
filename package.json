@@ -1,6 +1,6 @@
 {
   "name": "lorebotext",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "Deliver in-game lore to players of Destiny through a chrome extension",
   "main": "dist/index.js",
   "scripts": {

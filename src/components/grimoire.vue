@@ -13,8 +13,6 @@
     </div>
   </div>
   <div class="container" v-else>
-    <span class="title">Grimoire</span>
-    <hr>
     <article class="notification is-primary">
       {{ grimoireMessage }}
     </article>
@@ -32,7 +30,7 @@ export default {
   Store,
   data () {
     return {
-      grimoireMessage: '',
+      grimoireMessage: 'No Active Characters Found...',
       activity: '',
       activityName: '',
       activityDescription: '',
@@ -45,7 +43,7 @@ export default {
   methods: {
     getGrimoire: _.throttle(async function() {
       if(this.fetchCharacter.length == 0){
-        this.grimoireMessage = 'There is no current activity...'
+        this.grimoireMessage = 'Downloading Grimoire Database...'
       }else{
         try {
           this.activity = await Store.getters.fetchActivity
@@ -56,6 +54,7 @@ export default {
             this.grimoireCard = cards
           }else{
             this.grimoireMessage = "Cannot seem to find any Grimoire related to this activity..."
+            this.grimoireCard = ''
           }
         } catch (error) {
           this.grimoireMessage = 'Fetching Grimoire related to current activity...'

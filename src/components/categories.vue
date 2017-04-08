@@ -1,6 +1,6 @@
 <template>
 <section class="section" :getCategories="getCategories()">
-  <div v-if="categories != ''">
+  <div class="container" v-if="categories != ''">
     <span class="title">Grimoire Categories</span>
     <hr>
     <div class="columns">
@@ -18,8 +18,6 @@
     </div>
   </div>
   <div class="container" v-else>
-    <span class="title">Grimoire Categories</span>
-    <hr>
     <article class="notification is-primary">
       {{ categoryMessage }}
     </article>
@@ -62,6 +60,8 @@ export default {
               card.map((x)=>{
                 vm.categories = x.data.grimoire_card.categories
               })
+            }else{
+              vm.categories = ''
             }
           }
         })
