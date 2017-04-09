@@ -43,7 +43,6 @@ export default {
   Store,
   methods: {
     getCategories: _.throttle(async function(cards) {
-      let categories = []
       let card = []
       let vm = this
       this.grimoireCard = Store.getters.fetchCards
@@ -52,7 +51,7 @@ export default {
         this.grimoireCard.map(async function(x) {          
           let cardName = Ishtar.processSlug(x._id)
           let instance = await Ishtar.getCards(cardName)
-          if(instance.status != 200 || instance.data.grimoire_card.categories.length == 0){
+          if(instance.data.grimoire_card.categories.length == 0){
             vm.categoryMessage = 'There does not seem to be any categories for this activity...'
           }else{
             card.push(instance)

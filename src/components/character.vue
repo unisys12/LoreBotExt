@@ -141,10 +141,11 @@ export default {
           }
         }
 
-        Store.commit('storeActiveCharacters', active[0])
+        if(active.length > 0){
+          Store.commit('storeActiveCharacters', active[0])
 
-        this.activeCharacter = await this.fetchActiveCharacter
-        if(this.activeCharacter != ''){
+          this.activeCharacter = await this.fetchActiveCharacter
+          
           let characterRace = []
           characterRace.push(await getRace(this.activeCharacter.characterBase.raceHash))
           characterRace.map((x)=>{
