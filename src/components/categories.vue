@@ -46,12 +46,13 @@ export default {
       let card = []
       let vm = this
       this.grimoireCard = Store.getters.fetchCards
-      
+
       if(this.grimoireCard != ''){
-        this.grimoireCard.map(async function(x) {          
+        this.grimoireCard.map(async function(x) {
           let cardName = Ishtar.processSlug(x._id)
           let instance = await Ishtar.getCards(cardName)
           if(instance.data.grimoire_card.categories.length == 0){
+            vm.categories = ''
             vm.categoryMessage = 'There does not seem to be any categories for this activity...'
           }else{
             card.push(instance)
@@ -61,12 +62,13 @@ export default {
               })
             }else{
               vm.categories = ''
+              vm.categoryMessage = 'There does not seem to be any categories for this activity...'
             }
           }
         })
       }else{
         vm.categoryMessage = 'Enter an activity to check for categories...'
-      }      
+      }
     }, 5000, true)
   }
 }
