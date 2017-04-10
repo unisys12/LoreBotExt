@@ -6,7 +6,7 @@ let Ishtar = (()=> {
         getCards: (string)=> {
             return Axios('http://api.ishtar-collective.net/cards/' + string)
         },
-        
+
         getItems: (string)=> {
             return Axios('http://api.ishtar-collective.net/items/' + string)
         },
@@ -21,9 +21,10 @@ let Ishtar = (()=> {
             .replace('-', '')
             .replace(',', '')
             .replace('&#39;', "")
+            .replace(/[.]/g, '')
             .replace(/[^a-zA-Z0-9]/g, '-')
             .replace('--', '-')
-            .toLowerCase()            
+            .toLowerCase()           
         }
     }
 
