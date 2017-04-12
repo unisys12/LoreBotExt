@@ -42,19 +42,23 @@ export default {
   },
   methods: {
     getGrimoire: _.throttle(async function() {
-      try {
-        this.activity = await Store.getters.fetchActivity
-        let cards = await grimoireDefinitions.fetchCards(this.activity.activityName)
-        // Store grimoire card data
-        if(cards.length > 0){
-          Store.commit('storeGrimoire', cards)
-          this.grimoireCard = cards
-        }else{
-          this.grimoireMessage = "Cannot seem to find any Grimoire related to this activity..."
-          this.grimoireCard = ''
+      if(this.fetchCharacter.length == 0) {
+        this.grimoireMessage = 'Downloading Grimoire Database...'
+      }else{
+        try {
+          this.activity = await Store.getters.fetchActivity
+          let cards = await grimoireDefinitions.fetchCards(this.activity.activityName)
+          // Store grimoire card data
+          if(cards.length > 0){
+            Store.commit('storeGrimoire', cards)
+            this.grimoireCard = cards
+          }else{
+            this.grimoireMessage = "Cannot seem to find any Grimoire related to this activity..."
+            this.grimoireCard = ''
+          }
+        } catch (error) {
+          this.grimoireMessage = 'Fetching Grimoire related to current activity...', error
         }
-      } catch (error) {
-        this.grimoireMessage = 'Fetching Grimoire related to current activity...'
       }
     }, 10000, true)
   },

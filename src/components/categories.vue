@@ -43,7 +43,7 @@ export default {
   Store,
   methods: {
     getCategories: _.throttle(async function(cards) {
-      let card = []
+      let cat = []
       let vm = this
       this.grimoireCard = Store.getters.fetchCards
 
@@ -55,15 +55,8 @@ export default {
             vm.categories = ''
             vm.categoryMessage = 'There does not seem to be any categories for this activity...'
           }else{
-            card.push(instance)
-            if(card.length > 0){
-              card.map((x)=>{
-                vm.categories = x.data.grimoire_card.categories
-              })
-            }else{
-              vm.categories = ''
-              vm.categoryMessage = 'There does not seem to be any categories for this activity...'
-            }
+            Array.prototype.push.apply(cat, instance.data.grimoire_card.categories)
+            vm.categories = cat
           }
         })
       }else{
