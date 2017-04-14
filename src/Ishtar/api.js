@@ -3,8 +3,13 @@ const Axios = require('axios')
 let Ishtar = (()=> {
 
     return {
-        getCards: (string)=> {
-            return Axios('http://api.ishtar-collective.net/cards/' + string)
+
+        allCards: ()=> {
+            return Axios('http://api.ishtar-collective.net/cards/')
+        },
+
+        getNextSet: (string)=> {
+            return Axios('http://api.ishtar-collective.net/cards/page/' + string)
         },
 
         getItems: (string)=> {

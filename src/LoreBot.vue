@@ -20,7 +20,7 @@
 </section>
 <Character></Character>
 <Grimoire></Grimoire>
-<Categories></Categories>
+<!--<Categories></Categories>-->
 </div>
 </template>
 

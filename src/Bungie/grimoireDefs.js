@@ -1,6 +1,6 @@
 const loki = require('lokijs')
 const co = require('co')
-import DestinyQueries from './DestinyQueries'
+import Ishtar from '../Ishtar/api'
 
 const db = new loki('grimoire.json')
 const defs = db.addCollection('grimoireDefinitions')
@@ -13,26 +13,42 @@ let grimoireDefinitions = (()=>{
 
     async function fetchDB() {
 
-        let dbres
+        let init
+        let next
+        let data = []
+        let cards = []
 
         try {
-            dbres = await DestinyQueries.grimoireDefinition()
+            
+            init = await Ishtar.allCards()
+            for (var i = 0; i < init.data.meta.total_pages; i++) {
+                data.push(await Ishtar.getNextSet(i))
+            }
+
+            data.forEach(function(element) {
+                element.data.grimoire_cards.map((x)=>{
+                    cards.push(x)
+                })
+            }, this);
+        
         } catch (error) {
-            return error
+            console.log("Error Fetch Grimoire: ", error)
         }
 
-        if (!dbres) {
+        if (cards.length < 0) {
             return
         }else{
-            let dbresData = dbres.data
             let defObj = []
 
-            dbresData.map((x)=>{
+            cards.map((x)=>{
                 defObj.push({
-                    "_id": x.cardName,
-                    "cardIntro": x.cardIntro,
-                    "cardDescription": x.cardDescription,
-                    "cardImage": x.highResolution.image.sheetPath
+                    "_id": x.name,
+                    "url": x.ishtar_url,
+                    "cardIntro": x.intro,
+                    "cardAttribution": x.intro_attribution,
+                    "cardDescription": x.description,
+                    "cardImage": x.image_url,
+                    "categories": x.categories
                 })
             })
             return defObj
@@ -60,10 +76,10 @@ let grimoireDefinitions = (()=>{
 
         let collData = defs.data
 
-        if(collData.length > 0){            
+        if(collData.length > 0){          
             let results = defs.find({
                 '_id': {
-                    '$regex': processString(string)
+                    '$regex': string
                 }
             })
             return results
