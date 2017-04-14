@@ -10,17 +10,17 @@
           <h4 v-html="card.cardAttribution"></h4>
           <p v-html="card.cardDescription"></p>
       </article>
-      <figure class="column"><img :src="'https://bungie.net' + card.cardImage" alt="card-image"></figure>
-      <section class="section">
-        <div class="container">
-          <div class="columns" v-show="card.categories.length > 0">
-            <div class="column content category" v-for="categories in card.categories">
-              <h2>{{ categories.name }}</h2>
-              <a :href="categories.ishtar_url" target="_blank">More Info on {{ categories.name }}</a>
-            </div>
+      <figure class="column is-one-quarter"><img :src="'https://bungie.net' + card.cardImage" alt="card-image"></figure>
+      <div class="columns" v-show="card.categories.length > 0">
+        <article class="message" v-for="categories in card.categories">
+          <div class="message-header">
+            {{ categories.name }}
           </div>
-        </div>
-      </section>
+          <div class="message-body">
+            <a :href="categories.ishtar_url" target="_blank">More Info on {{ categories.name }}</a>
+          </div>
+        </article>
+      </div>
       <br>
     </div>
   </div>
@@ -81,3 +81,8 @@ export default {
   }
 }
 </script>
+<style>
+.message {
+  margin-right: .5em
+}
+</style>
