@@ -12,8 +12,7 @@ export default new Vuex.Store({
     membershipType: '',
     activeCharacters: [],
     activity: '',
-    grimoire: '',
-    categories: ''
+    grimoire: ''
   },
   mutations: {
     storeDisplayName: function(state, string) {
@@ -39,9 +38,6 @@ export default new Vuex.Store({
     },
     storeGrimoire: function(state, cards) {
       state.grimoire = cards
-    },
-    storeCategories: function(store, categories) {
-      state.categories = categories
     }
   },
   getters: {
@@ -68,9 +64,6 @@ export default new Vuex.Store({
     },
     fetchCards: function(state) {
       return state.grimoire
-    },
-    fetchCategories: function(state) {
-      return state.categories
     }
   }
 })

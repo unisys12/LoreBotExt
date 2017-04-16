@@ -20,7 +20,6 @@
 </section>
 <Character></Character>
 <Grimoire></Grimoire>
-<!--<Categories></Categories>-->
 </div>
 </template>
 
@@ -28,7 +27,6 @@
 import Store from './store'
 import Character from './components/character.vue'
 import Grimoire from './components/grimoire.vue'
-import Categories from './components/categories.vue'
 
 export default {
   name: 'LoreBot',
@@ -51,7 +49,7 @@ export default {
       return pkg.version
     }
   },
-  components: { Character, Grimoire, Categories }
+  components: { Character, Grimoire }
 }
 </script>
 

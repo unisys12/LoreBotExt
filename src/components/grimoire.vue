@@ -49,8 +49,7 @@ export default {
       destinationHash: '',
       placeHash: '',
       activityTypeHash: '',
-      grimoireCard: '',
-      categories: ''
+      grimoireCard: ''
     }
   },
   methods: {
