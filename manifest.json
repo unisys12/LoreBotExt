@@ -24,7 +24,8 @@
       "19": "assets/images/favicon-16.png",
       "38": "assets/images/favicon-32.png"
     },
-    "default_title": "Destiny LoreBot"
+    "default_title": "Destiny LoreBot",
+    "browser_style": true
   },
   "options_page": "index.html"
 }
