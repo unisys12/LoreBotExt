@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     getPlayer: async function(obj) {
-      let res = await searchDestinyPlayer(obj)
+      let res = await searchDestinyPlayer(obj.trim())
       let account = res.data.Response
       if(account){
         if(account.length > 0){
