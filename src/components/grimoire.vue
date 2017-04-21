@@ -17,6 +17,7 @@
             {{ categories.name }}
           </div>
           <div class="message-body">
+            <p>{{ categories.short_summary }}</p>
             <a :href="categories.ishtar_url" target="_blank">More Info on {{ categories.name }}</a>
           </div>
         </article>
